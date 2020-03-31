@@ -18,6 +18,8 @@
 !/log/.keep
 !/tmp/.keep
 
+.env
+
 # Ignore uploaded files in development.
 /storage/*
 !/storage/.keep
