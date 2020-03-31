@@ -1,0 +1,23 @@
+<%= form_with model: @event do |f| %>
+<%=f.label :name %>
+<%=f.text_field :name %>
+
+
+<%# make this a drop down! %>
+<%=f.label :category %>
+<%=f.text_field :category %>
+
+  Addresses:
+  <ul>
+    <%= f.fields_for :addresses do |addresses_form| %>
+      <li>
+        <%= addresses_form.label :kind %>
+        <%= addresses_form.text_field :kind %>
+ 
+        <%= addresses_form.label :street %>
+        <%= addresses_form.text_field :street %>
+        ...
+      </li>
+    <% end %>
+  </ul>
+<% end %>
