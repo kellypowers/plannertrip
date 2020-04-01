@@ -1,0 +1,10 @@
+<% if name = session[:name] %>
+  <p>Welcome <%= name -%>! We know who you are thanks to Omniauth!</p>
+  <p>You were authenticated by  <%= session[:omniauth_data]['provider'] %></p>
+
+<% else %>
+  <p>No authentication information is available.</p>
+  <p>Try <%= link_to 'Signing in with the developer strategy', '/auth/developer'%>.</p>
+  <p>Try <%= link_to 'Signing in with the GitHub strategy', '/auth/github'%>.</p>
+  <p>Sign Up <%=link_to 'Sign Up', '/user/new'%></p>
+<% end %>
