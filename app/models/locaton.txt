@@ -10,3 +10,83 @@ after_validation -> {
 after_validation :reverse_geocode, unless: ->(obj) { obj.raw_address.present? },
                  if: ->(obj){ obj.latitude.present? and obj.latitude_changed? and obj.longitude.present? and obj.longitude_changed? }
 [...]
+
+places_controller.rb
+
+[...]
+private
+
+def place_params
+  params.require(:place).permit(:title, :raw_address, :latitude, :longitude, :visited_by)
+end
+
+views/places/_form.html.erb
+
+<h4>Enter either address or coordinates</h4>
+<fieldset class="form-group">
+  <%= f.label :raw_address, 'Address' %>
+  <%= f.text_field :raw_address, class: "form-control" %>
+  <small class="text-muted">You can also enter IP. Your IP is <%= request.ip %></small>
+</fieldset>
+
+<div class="form-group row">
+  <div class="col-sm-1">
+    <%= f.label :latitude %>
+  </div>
+
+  <div class="col-sm-3">
+    <%= f.text_field :latitude, class: "form-control" %>
+  </div>
+
+  <div class="col-sm-1">
+    <%= f.label :longitude %>
+  </div>
+
+  <div class="col-sm-3">
+    <%= f.text_field :longitude, class: "form-control" %>
+  </div>
+</div>
+
+
+layouts/application.html.erb
+
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=initMap"
+async defer></script>
+
+
+
+    map.coffee
+    window.initMap = ->
+  if $('#map').size() > 0
+    map = new google.maps.Map document.getElementById('map'), {
+      center: {lat: -34.397, lng: 150.644}
+      zoom: 8
+    }
+
+
+
+    views/places/_form.html.erb
+
+[...]
+<div class="card">
+  <div class="card-block">
+    <div id="map"></div>
+  </div>
+</div>
+
+Note that google.maps.Map requires a JS node to be passed, so this
+
+new google.maps.Map $('#map')
+will not work as $('#map') returns a wrapped jQuery set. To turn it into a JS node, you may say $('#map')[0]
+
+Placing Markers Based on Coordinates
+Suppose a user knows coordinates and want to find them on the map instead. This feature is easy to add. Introduce a new “Find on the map” link:
+
+views/places/_form.html.erb
+<div class="col-sm-3">
+  <%= f.text_field :longitude, class: "form-control" %>
+</div>
+
+<div class="col-sm-4">
+  <a href="#" id="find-on-map" class="btn btn-info btn-sm">Find on the map</a>
+</div>
