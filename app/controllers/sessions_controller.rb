@@ -1,4 +1,24 @@
 class SessionsController < ApplicationController
+    skip_before_action :verified_user, only: [:new, :create]
+
+  def new
+    @user = User.new
+  end
+
+#   def create
+    
+#     if @user = User.find_by(name: params[:user][:name])
+#       session[:user_id] = @user.id
+#       redirect_to user_path(@user)
+#     else
+#       render 'new'
+#     end
+#   end
+
+  def destroy
+    session.delete("user_id")
+    redirect_to root_path
+  end
   
     def create
       # After entering a name and email value in the /auth/developer
@@ -13,8 +33,6 @@ class SessionsController < ApplicationController
       # after redirect, we have access to the returned data
       session[:name] = request.env['omniauth.auth']['info']['name']
       session[:omniauth_data] = request.env['omniauth.auth']
-  
-      # Ye olde redirect
       redirect_to root_path
     end
   end
