@@ -1,15 +1,40 @@
 <!DOCTYPE html>
+<html lang="en">
 <html>
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/style.css">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <title>Plantrip</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+     <link rel="stylesheet" href="/public/style.css">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+   
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-green-700">
+    <button class="bg-green-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded" href="/">
+      <%=link_to "Home", root_path%>
+    </button>
+    <%if logged_in?%>
+     <button class="bg-green-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded" >
+        
+        <%= link_to "Log Out", logout_path, method: :delete %>
+      </button>
+    <%else%>
+        <button class="bg-green-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded" >
+          <%=link_to 'Log in', '/login'%>
+        </button>
+        <button class="bg-green-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded" >
+          <%=link_to 'Sign Up', '/signup'%>
+        </button>
+    <%end%>
+
+    
+    <div class="bg-green-100 text-center px-2">
+      <%= yield %>
+    </div>
   </body>
 </html>

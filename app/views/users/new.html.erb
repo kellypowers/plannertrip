@@ -1,8 +1,9 @@
-<%= form_for @user, controller: 'users', action: 'create' do |f| %>
-  Name: <%=f.text_field :name%>
-  Email: <%=f.text_field :email%>
-  Username: <%= f.text_field :username %>
-  Password: <%= f.password_field :password %>
-  Password Confirmation: <%= f.password_field :password_confirmation %>
-  <%= f.submit "Submit" %>
-<% end %>
+<h1>Sign Up</h1>
+
+<%= render partial: "form", locals: { user: @user } %>
+
+Or:
+<p>Try <%= link_to 'Signing in with Facebook', '/auth/facebook'%>.</p>
+<p>Try <%= link_to 'Signing in with GitHub', '/auth/github'%>.</p>
+Or
+<p><%=link_to 'Log in', '/login'%></p>

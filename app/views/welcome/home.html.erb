@@ -1,14 +1,29 @@
 <% if name = session[:name] %>
   <p>Welcome <%= name -%>! We know who you are thanks to Omniauth!</p>
   <p>You were authenticated by  <%= session[:omniauth_data]['provider'] %></p>
-  <h1>Hi, <%= current_user.name %></h1>
-<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
-  <input type=submit value='logout'>
-<% end %>
+  
+<%= link_to "Log Out", logout_path, method: :delete %>
 
 <% else %>
   <p>No authentication information is available.</p>
   <p>Try <%= link_to 'Signing in with the Facebook strategy', '/auth/facebook'%>.</p>
   <p>Try <%= link_to 'Signing in with the GitHub strategy', '/auth/github'%>.</p>
   <p><%=link_to 'Sign Up', '/users/new'%></p>
+  <p><%=link_to 'Log in', '/login'%></p>
+  <p><%= link_to "Log Out", logout_path, method: :delete %></p>
 <% end %>
+
+
+
+Session 
+<%=session%>
+
+id
+<%=session[:user_id]%>
+
+<br>
+logged in?
+<%if logged_in?%>
+"true"
+<%=true%>
+<%end%>
