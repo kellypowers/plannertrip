@@ -1,19 +1,37 @@
 <form>
   <%= form_with model: @event do |f| %>
-  <%=f.label :name %>
-  <%=f.text_field :name %>
 
-  <%# make this a drop down! %>
-  <%=f.label :category %>
-  <%=f.text_field :category %>
+  <div class="form-label">
+    <%=f.label :name %>
+  </div>
+  <div class="form-field">
+    <%=f.text_field :name %>
+  </div>
+  <br>
+    <%# make this a drop down! %>
+  <div class="form-label">
+    <%=f.label :category %>
+  </div>
+  <div class="form-field">
+    <%=f.text_field :category %>
+  </div>
+  <br>
+  <div class="form-label">
+    <%=f.label :description %>
+  </div>
+  <div class="form-field">
+    <%=f.text_field :description %>
+  </div>
+  <br>
+  <div class="form_label">
+    <%=f.label :already_visited %>
+  </div>
+  <div class="form-checkbox">
+    <%=f.check_box :already_visited %>
+  </div>
+  <br>
 
-  <%=f.label :description %>
-  <%=f.text_field :description %>
-
-  <%=f.label :already_visited %>
-  <%=f.check_box :already_visited %>
-
-  <%# if check box is checked, optional date, rating, comment. %>
+  <%# ^^if check box is checked, optional date, rating, comment. %>
     Addresses:
     <ul>
       <%= f.fields_for :addresses do |addresses_form| %>
