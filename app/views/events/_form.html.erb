@@ -20,8 +20,11 @@
     <ul>
       <%= f.fields_for :addresses do |addresses_form| %>
         <li>
-          <%= addresses_form.label :name %>
-          <%= addresses_form.text_field :name %>
+          <div class="form-label">
+            <%= addresses_form.label :name %>
+          </div>
+          <div class="form-field">
+            <%= addresses_form.text_field :name %>
   
           <%= addresses_form.label :street %>
           <%= addresses_form.text_field :street %>
