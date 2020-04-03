@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
-    has_many :addresses 
+    has_many :event_addresses
+    has_many :addresses, through: :event_addresses 
+    accepts_nested_attributes_for :event_addresses
     has_many :users
     has_many :categories
     has_many :locations, through: :addresses 
