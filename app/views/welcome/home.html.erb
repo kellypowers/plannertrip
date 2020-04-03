@@ -1,23 +1,26 @@
-<% if name = session[:name] %>
+<% if name = session[:name] && logged_in?%>
   <p>Welcome <%= name -%>! We know who you are thanks to Omniauth!</p>
   <p>You were authenticated by  <%= session[:omniauth_data]['provider'] %></p>
   
 <%= link_to "Log Out", logout_path, method: :delete %>
-
+<%elsif logged_in?%>
+<p> elsif </p>
+  <p> Welcome <%=current_user.name%>! </p>
+  <p><%= link_to "Log Out", logout_path, method: :delete %></p>
 <% else %>
   <p>No authentication information is available.</p>
   <p>Try <%= link_to 'Signing in with the Facebook strategy', '/auth/facebook'%>.</p>
   <p>Try <%= link_to 'Signing in with the GitHub strategy', '/auth/github'%>.</p>
   <p><%=link_to 'Sign Up', '/users/new'%></p>
   <p><%=link_to 'Log in', '/login'%></p>
-  <p><%= link_to "Log Out", logout_path, method: :delete %></p>
+  
 <% end %>
 
 
 
 Session 
 <%=session%>
-
+session name <%=session[:omniauth_data]%>
 id
 <%=session[:user_id]%>
 

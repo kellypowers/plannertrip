@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<html>
+<html class="h-screen bg-no-repeat bg-cover" style="background: linear-gradient(white 0%, #764ba2 100%">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,31 +9,30 @@
     <title>Plantrip</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-     <link rel="stylesheet" href="/public/style.css">
+     
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
    
   </head>
 
-  <body class="bg-green-700">
-    <button class="bg-green-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded" href="/">
+  <body class="py-2">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4" href="/">
       <%=link_to "Home", root_path%>
     </button>
     <%if logged_in?%>
-     <button class="bg-green-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded" >
-        
+     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4" >
         <%= link_to "Log Out", logout_path, method: :delete %>
       </button>
     <%else%>
-        <button class="bg-green-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded" >
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4" >
           <%=link_to 'Log in', '/login'%>
         </button>
-        <button class="bg-green-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded" >
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4" >
           <%=link_to 'Sign Up', '/signup'%>
         </button>
     <%end%>
 
     
-    <div class="bg-green-100 text-center px-2">
+    <div class="">
       <%= yield %>
     </div>
   </body>
