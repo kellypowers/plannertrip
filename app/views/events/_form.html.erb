@@ -36,50 +36,7 @@
     <%=f.text_field :description %>
   </div>
   <br>
-  <div class="form_label">
-    <%=f.label :already_vistied %>
-  </div>
-  <div class="form-checkbox">
-    <%=f.check_box :already_vistied %>
-  </div>
-  <br>
 
-  <%# ^^if check box is checked, optional date, rating, comment. %>
-    Addresses:
-    <ul>
-      <%= f.fields_for :addresses do |addresses_form| %>
-        <li>
-          <br>
-          <div class ="form-label">
-            <%= addresses_form.label :street %>
-          </div>
-          <div class="form-field">
-            <%= addresses_form.text_field :street %>
-          </div>
-          <br>
-          <div class= "form-label">
-            <%= addresses_form.label :state %>
-          </div>
-          <div class="form-field">
-            <%= addresses_form.text_field :state %>
-          </div>
-          <br>
-          <div class="form-label">
-            <%= addresses_form.label :city %>
-          </div>
-          <div class="form-field">
-            <%= addresses_form.text_field :city %>
-          </div>
-          <br>
-          <div class="form-label">
-            <%= addresses_form.label :country %>
-          </div>
-          <div class="form-field">
-            <%= addresses_form.text_field :country %>
-          </div>
-        </li>
-      <% end %>
-    </ul>
     <div class="submit-button">
       <%=f.submit%>
     </div>

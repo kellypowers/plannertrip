@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
 
+
   
   resources :users
 
@@ -17,9 +18,5 @@ Rails.application.routes.draw do
     resources :addresses 
   end
 
-  resources :addresses
-  
-  resources :locations do 
-    resources :addresses
-  end
+
 end

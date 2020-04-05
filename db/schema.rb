@@ -10,34 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_02_211706) do
+ActiveRecord::Schema.define(version: 2020_04_05_210120) do
 
   create_table "addresses", force: :cascade do |t|
-    t.string "category"
     t.string "street"
     t.string "city"
     t.string "state"
     t.string "country"
-    t.integer "event_id"
-  end
-
-  create_table "comments", force: :cascade do |t|
   end
 
   create_table "event_addresses", force: :cascade do |t|
     t.integer "event_id"
     t.integer "address_id"
-    t.string "category"
+    t.string "comment"
   end
 
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.string "category"
     t.string "description"
-    t.boolean "already_vistied"
-  end
-
-  create_table "locations", force: :cascade do |t|
   end
 
   create_table "users", force: :cascade do |t|

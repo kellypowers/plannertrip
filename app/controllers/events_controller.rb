@@ -6,20 +6,25 @@ class EventsController < ApplicationController
 
     def create
         @event = Event.create(event_params)
-        @event.addresses.build(category: @event.category)
+        redirect_to event_path(@event)
+        #@event.addresses.build(category: @event.category)
         # ...
+    end
+
+    def show 
+        @event = Event.find(params[:id])
     end
         
     private
 
     def event_params
-        params.require(:event).permit(:name, :category, :description, :already_vistied, 
-            addresses_attributes: [
-                :category,
-                :street, 
-                :city, 
-                :state, 
-                :country])
+        params.require(:event).permit(:name, :category, :description)
+            # addresses_attributes: [
+            #     :category,
+            #     :street, 
+            #     :city, 
+            #     :state, 
+            #     :country])
     end
 
 end

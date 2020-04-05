@@ -7,7 +7,6 @@ Event Category<%=@event.category%>
 Event Description <%=@event.description%>
 
 
-<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@event_location.latitude},#{@event_location.longitude}&markers=#{@event_location.latitude},#{@event_location.longitude}&zoom=7&size=640x400&key=#{ENV['MY_KEY']}", #!!!!add key here
-              class: 'img-fluid img-rounded', alt: "#{@event_location.title} on the map"%>
+ <%=link_to "Add Address to this Event", new_event_address_path(@event)%>
 
-<header><h1 class="display-4"><%= @event_location.title %></h1></header>
+

@@ -1,0 +1,57 @@
+
+  <%= form_for @address do |f| %>
+      <% if @address.errors.any? %>
+      <div id="error_explanation">
+    <h2>
+      <%= pluralize(@address.errors.count, "error") %>
+      prohibited this post from being saved:
+    </h2>
+ 
+    <ul>
+    <% @address.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+    <% end %>
+    </ul>
+
+          <br>
+          <div class ="form-label">
+            <%= f.label :street %>
+          </div>
+          <div class="form-field">
+            <%= f.text_field :street %>
+          </div>
+          <br>
+          <div class= "form-label">
+            <%= f.label :state %>
+          </div>
+          <div class="form-field">
+            <%= f.text_field :state %>
+          </div>
+          <br>
+          <div class="form-label">
+            <%= f.label :city %>
+          </div>
+          <div class="form-field">
+            <%= f.text_field :city %>
+          </div>
+          <br>
+          <div class="form-label">
+            <%= f.label :country %>
+          </div>
+          <div class="form-field">
+            <%= f.text_field :country %>
+          </div>
+        
+
+    <div class="submit-button">
+      <%=f.submit%>
+    </div>
+  <% end %>
+
+  <%# join users/ratings of people who have been %>
+
+  <%# will have a join table with the user who created it and those who also go, can rate  %>
+  <%# join table for users who star it  %>
+  <%# join table for categories?  %>
+  <%# joiin tavle with location ^^<< can be searched by these things, %>
+  <%# join with each of the lists it can be added to %>
