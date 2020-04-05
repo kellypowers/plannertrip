@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root 'welcome#home'
   resources :sessions, only: [:new, :create, :destroy]
   get '/signup' => 'users#new'
+  post '/signup' => 'users#create'
+  post '/sessions' => "sessions#create"
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'

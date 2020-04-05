@@ -1,6 +1,6 @@
 
 class SessionsController < ApplicationController
-    skip_before_action :verified_user, only: [:new, :create]
+  skip_before_action :verified_user, only: [:new, :create]
 
   def new
   end
@@ -13,14 +13,14 @@ class SessionsController < ApplicationController
 
         u.password = SecureRandom.hex
       end 
-      sesssion[:user_id] = @user.id
+      session[:user_id] = @user.id
       
       
-      redirect_to root_path
+      redirect_to user_path(@user)
       #@user = User.find_or_create_by_omniauth(auth_hash)
       #session[:user_id] = @user.id
       #redirect_to user_path(@user), flash[:message] = "You successfully logged in!" 
-    elsif @user = User.find_by(email: params[:email])
+    elsif @user = User.find_or_create_by(email: params[:email])
       if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id # log in the user
         redirect_to user_path(@user), flash[:message] = "You successfully logged in! Welcome, #{@user.name}!"

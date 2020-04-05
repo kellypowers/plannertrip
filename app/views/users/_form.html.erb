@@ -1,6 +1,18 @@
-<form>
-  <%= form_for user do |f| %>
 
+  <%= form_for user do |f| %>
+    <% if user.errors.any? %>
+      <div id="error_explanation">
+    <h2>
+      <%= pluralize(user.errors.count, "error") %>
+      prohibited this post from being saved:
+    </h2>
+ 
+    <ul>
+    <% user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+    <% end %>
+    </ul>
+    <% end %>
 
     <div class="form-label">
       <%=f.label(:name, "Name")%>
@@ -24,21 +36,9 @@
       <%= f.password_field :password %>
     </div> 
     <br>
-    <div class="form-label">
-      <%=f.label(:password_confirmation, "Confirm Password")%>
-    </div>
-    <div class="form-field">
-      <%= f.password_field :password_confirmation %>
-    </div> 
-    <br>
+
     <div class="submit-button">
       <%= f.submit "Submit" %>
     </div>
+<%end%>
 
-      <% if user.errors.any? %>
-      <% user.errors.full_messages.each do |msg| %>
-       <%= content_tag(:p, "#{msg}", id: "error-msg") %>
-      <% end %>
-  <% end %>
-  <% end %>
-</form>

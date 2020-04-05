@@ -1,17 +1,21 @@
 class EventsController < ApplicationController
 
+    def new 
+        @event = Event.new
+    end
+
     def create
-        @event = Event.new(event_params)
-        @event.event_addresses.build(category: @event.category).build_address
+        @event = Event.create(event_params)
+        @event.addresses.build(category: @event.category)
         # ...
-        end
+    end
         
     private
 
-    def person_params
-        params.require(:event).permit(:name, :category, :description, :already_visited, 
+    def event_params
+        params.require(:event).permit(:name, :category, :description, :already_vistied, 
             addresses_attributes: [
-                :name, 
+                :category,
                 :street, 
                 :city, 
                 :state, 

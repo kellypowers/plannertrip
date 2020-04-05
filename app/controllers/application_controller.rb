@@ -7,11 +7,13 @@ class ApplicationController < ActionController::Base
     private 
 
     def verified_user
-        redirect_to '/' unless logged_in?
+        if !logged_in?
+            redirect_to login_path 
+        end
     end
 
     def current_user
-        @user ||= User.find_by(id: session[:user_id])
+        @user ||= User.find_by(id: session[:user_id]) if session[:user_id]
     end
 
     def logged_in?

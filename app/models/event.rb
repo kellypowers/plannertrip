@@ -1,7 +1,9 @@
 class Event < ApplicationRecord
-    has_many :event_addresses, inverse_of: :address
-    has_many :addresses, through: :event_addresses 
-    accepts_nested_attributes_for :event_addresses
+    # has_many :event_addresses, inverse_of: :address
+    # has_many :addresses, through: :event_addresses 
+    # accepts_nested_attributes_for :event_addresses
+    has_many :addresses 
+    accepts_nested_attributes_for :addresses
     has_many :users
     has_many :categories
     has_many :locations, through: :addresses 
@@ -16,7 +18,7 @@ class Event < ApplicationRecord
     has_many :planned_locations, ->{ where(already_been: false) }, class_name: 'Location'
 
         #conditional assiciations
-      end
+    
       
       #User.find(1).visitd_locations
       

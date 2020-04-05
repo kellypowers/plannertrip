@@ -1,5 +1,18 @@
-<form>
-  <%= form_with model: @event do |f| %>
+
+  <%= form_for event do |f| %>
+      <% if event.errors.any? %>
+      <div id="error_explanation">
+    <h2>
+      <%= pluralize(event.errors.count, "error") %>
+      prohibited this post from being saved:
+    </h2>
+ 
+    <ul>
+    <% event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+    <% end %>
+    </ul>
+    <% end %>
 
   <div class="form-label">
     <%=f.label :name %>
@@ -24,10 +37,10 @@
   </div>
   <br>
   <div class="form_label">
-    <%=f.label :already_visited %>
+    <%=f.label :already_vistied %>
   </div>
   <div class="form-checkbox">
-    <%=f.check_box :already_visited %>
+    <%=f.check_box :already_vistied %>
   </div>
   <br>
 
@@ -36,12 +49,6 @@
     <ul>
       <%= f.fields_for :addresses do |addresses_form| %>
         <li>
-          <div class="form-label">
-            <%= addresses_form.label :name %>
-          </div>
-          <div class="form-field">
-            <%= addresses_form.text_field :name %>
-          </div>
           <br>
           <div class ="form-label">
             <%= addresses_form.label :street %>
@@ -77,7 +84,7 @@
       <%=f.submit%>
     </div>
   <% end %>
-</form>
+
   <%# join users/ratings of people who have been %>
 
   <%# will have a join table with the user who created it and those who also go, can rate  %>

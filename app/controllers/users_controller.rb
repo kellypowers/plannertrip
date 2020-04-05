@@ -4,16 +4,20 @@ class UsersController < ApplicationController
   
     def new
       @user = User.new
+      #params.inspect
     end
   
     def create
+      #raise params.inspect
       @user = User.new(user_params)
       #binding.pry 
       if @user.save 
         session[:user_id] = @user.id
-        redirect_to root_path
+        #redirect_to user_path(@user)
+        redirect_to user_path(@user)
       else
         #binding.pry
+        #flash[:message] = "did not work"
         render 'new'
       end
     end
@@ -37,16 +41,14 @@ class UsersController < ApplicationController
     end
 
     def update 
-      current_user.update(user_params)
+      @user = User.find(params[:id])
+      @user.update(user_params[:name])
+      redirect_to user_path(@user)
     end
   
     private
   
     def user_params
-      params.require(:user).permit(
-        :name,
-        :password,
-        :email
-      )
+      params.require(:user).permit(:name, :password, :email)
     end
   end
