@@ -1,0 +1,6 @@
+<% @events.each do |event| %>
+<div class="event">
+  <span><%=link_to event.name, event_path(event) %></span>
+  <%= link_to "Delete", event, method: :delete, data: { confirm: "Really?" } %>
+</div>
+<% end %>

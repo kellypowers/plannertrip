@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
     has_many :event_addresses, inverse_of: :address
     has_many :addresses, through: :event_addresses 
+    belongs_to :user
     # accepts_nested_attributes_for :event_addresses
     
    

@@ -1,12 +1,15 @@
 
 
 Event Name <%=@event.name%>
+<br>
 
+Event Category<%=@event.category%> <br>
+Event Description <%=@event.description%><br>
+Event Address <%@event.addresses.each do |add|%>
+    <%=add.full_address%>
+<%end%>
 
-Event Category<%=@event.category%>
-Event Description <%=@event.description%>
-
-
+<br>
  <%=link_to "Add Address to this Event", new_event_address_path(@event)%>
 
 

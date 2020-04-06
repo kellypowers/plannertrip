@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_04_05_210120) do
     t.string "name"
     t.string "category"
     t.string "description"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -36,6 +36,33 @@
     <%=f.text_field :description %>
   </div>
   <br>
+  <%= f.fields_for(:address) do |af| %>
+    <div class="form-label">
+        <%=af.label :street %>
+    </div>
+    <div class="form-field">
+        <%=af.text_field :street %>
+    </div>
+    <br>
+
+    <div class="form-label">
+        <%=af.label :city %>
+    </div>
+    <div class="form-field">
+        <%=af.text_field :city %>
+    </div>
+    <br>
+    <div class="form-label">
+        <%=af.label :state %>
+    </div>
+    <div class="form-field">
+        <%=af.text_field :country %>
+    </div>
+    <br>
+    <div class="form-field">
+        <%=af.text_field :country %>
+    </div>
+    <%end%>
 
     <div class="submit-button">
       <%=f.submit%>

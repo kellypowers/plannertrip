@@ -3,16 +3,17 @@ class AddressesController < ApplicationController
 
     def new
         #raise params.inspect
-        @event = Event.find_by_id(:event_id)
+        @event = Event.find_by_id(params[:event_id])
         # @address = @event.addresses.build(post_params)
-         #@address.event_addresses.build(event_id: params[:event_id], address_id: @address.id)
-        @address = Address.new
+         @address= @event.event_addresses.build
+        #@address = Address.new
+        
     end
 
     def create
         # @address=Address.create(address_params)
         # @address.event_addresses.build(event_id: params[:event_id], address_id: @address.id)
-        @event = Event.find(params[:id])
+        @event = Event.find_by_id(params[:event_id])
         @address = @event.addresses.build(post_params)
         @address.event_addresses.build(event_id: params[:event_id], address_id: @address.id)
         redirect_to event_path(@event)
