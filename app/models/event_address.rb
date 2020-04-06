@@ -1,6 +1,6 @@
 class EventAddress < ApplicationRecord
-    belongs_to :events
-    belongs_to :addresses
+    belongs_to :event
+    belongs_to :address
 
     
 end

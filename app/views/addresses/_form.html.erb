@@ -1,5 +1,9 @@
 
-  <%= form_for address do |f| %>
+  <%= form_for [@event, @address] do |f| %>
+
+
+
+  <%=f.hidden_field :event_id%>
       <% if address.errors.any? %>
       <div id="error_explanation">
     <h2>

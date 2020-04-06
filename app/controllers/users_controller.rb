@@ -23,9 +23,9 @@ class UsersController < ApplicationController
     end
 
   
-    # def show
-    #   @locations = Location.all
-    # end
+    def show
+      @user = User.find(params[:id])
+    end
 
     # def search  
     #   if params[:search].blank?  

@@ -1,36 +1,15 @@
 
   <%= form_for @event do |f| %>
-    <div class="form-label">
-        <%=f.label :name %>
-    </div>
-    <div class="form-field">
-        <%=f.text_field :name %>
-    </div>
-    <br>
-    <div class="form-label">
-        <%=f.label :category %>
-    </div>
-    <div class="form-field">
-        <%=f.text_field :category %>
-    </div>
-    <br>
-    <div class="form-label">
-        <%=f.label :description %>
-    </div>
-    <div class="form-field">
-        <%=f.text_area :description %>
-    </div>
-    <br>
+  
 
-  <%= f.fields_for(:address) do |af| %>
-    <div class="form-label">
+  <%= f.fields_for @address do |af| %>
+     <div class="form-label">
         <%=af.label :street %>
     </div>
     <div class="form-field">
         <%=af.text_field :street %>
     </div>
     <br>
-
     <div class="form-label">
         <%=af.label :city %>
     </div>
@@ -42,14 +21,19 @@
         <%=af.label :state %>
     </div>
     <div class="form-field">
-        <%=af.label :country %>
+        <%=af.text_field :state %>
     </div>
     <br>
+    <div class="form-label">
+        <%=af.label :country %>
+    </div>
     <div class="form-field">
         <%=af.text_field :country %>
     </div>
+    <br>
+    <% end %>
         <div class="submit-button">
-        <%=af.submit%>
+        <%=f.submit%>
         </div>
-     <% end %>
+     
   <% end %>

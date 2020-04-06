@@ -1,8 +1,10 @@
 
 <h2><%=@user.name%>'s Events</h2>
-<%@user.events.each do |event|%>
-<%=event.name%>
-<%end%>
+    <ul>
+        <%@user.events.each do |event|%>
+            <li><%=link_to event.name, event_path(event)%></li>
+        <%end%>
+    </ul>
 <%=link_to "Create new event", '/events/new'%>
 
 

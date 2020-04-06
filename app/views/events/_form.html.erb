@@ -14,6 +14,7 @@
     </ul>
     <% end %>
 
+ <%=f.hidden_field :user_id%>
   <div class="form-label">
     <%=f.label :name %>
   </div>
@@ -36,7 +37,12 @@
     <%=f.text_field :description %>
   </div>
   <br>
-  <%= f.fields_for(:address) do |af| %>
+
+
+   <%= f.fields_for :addresses, event.addresses do |af| %>
+   <ul>
+    <li>
+
     <div class="form-label">
         <%=af.label :street %>
     </div>
@@ -52,22 +58,30 @@
         <%=af.text_field :city %>
     </div>
     <br>
+
     <div class="form-label">
         <%=af.label :state %>
     </div>
     <div class="form-field">
-        <%=af.text_field :country %>
+        <%=af.text_field :state %>
     </div>
     <br>
+      <div class="form-label">
+        <%=af.label :country %>
+    </div>
     <div class="form-field">
         <%=af.text_field :country %>
     </div>
+    
+    </li>
     <%end%>
-
-    <div class="submit-button">
-      <%=f.submit%>
-    </div>
+    </ul>
+    <br>
+  <div class="submit-button">
+    <%=f.submit%>
+  </div>
   <% end %>
+
 
   <%# join users/ratings of people who have been %>
 

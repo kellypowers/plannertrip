@@ -3,5 +3,9 @@ class Address < ApplicationRecord
     has_many :events, through: :event_addresses
     # has_many :events 
     # accepts_nested_attributes_for :events
+
+    def full_address 
+        [self.street, self.city, self.state, self.country].compact.join(', ')
+    end 
 end
 

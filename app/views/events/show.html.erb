@@ -11,5 +11,11 @@ Event Address <%@event.addresses.each do |add|%>
 
 <br>
  <%=link_to "Add Address to this Event", new_event_address_path(@event)%>
+ <br>
+ <%=link_to "Edit this Event", edit_event_path(@event) %>
+<br>
+<%= form_tag event_path(@event.id), method: "delete" do %>
+  <%= submit_tag "Delete #{@event.name}" %>
+<% end %>
 
 

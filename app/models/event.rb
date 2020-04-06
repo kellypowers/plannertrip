@@ -2,7 +2,27 @@ class Event < ApplicationRecord
     has_many :event_addresses, inverse_of: :address
     has_many :addresses, through: :event_addresses 
     belongs_to :user
-    # accepts_nested_attributes_for :event_addresses
+    accepts_nested_attributes_for :addresses
+
+    # def addresses_attributes=(address_attributes)
+    #   address_attributes.values.each do |address_attribute|
+    #   address = Address.find_or_create_by(address_attribute)
+    #   self.addresses << address
+    # end
+  #end
+
+  def find_address(street_ad)
+    self.addresses.each do |ad|
+      if ad.street == street_ad
+        return ad 
+      else 
+        false 
+      end
+    end
+  end
+
+
+
     
    
     # has_many :users
