@@ -1,3 +1,7 @@
+<%if flash[:message].present?%>
+    <%=flash[:message]%>
+<%end%>
+
 <% @events.each do |event| %>
 <div class="event">
   <span><%=link_to event.name, event_path(event) %></span>

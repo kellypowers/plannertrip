@@ -1,6 +1,8 @@
 class Event < ApplicationRecord
-  has_many :users
-  has_many :planners, through: :users
+  # has_many :user_events
+  # has_many :users, through: :user_events
+  belongs_to :user
+  # has_many :planners, through: :users
   has_many :ratings 
   #belongs_to :user #? 
   geocoded_by :full_address
@@ -27,7 +29,7 @@ class Event < ApplicationRecord
    end
 
   def find_address(street_ad)
-    self.addresses.each do |ad|
+    self.each do |ad|
       if ad.street == street_ad
         return ad 
       else 
@@ -49,7 +51,7 @@ class Event < ApplicationRecord
   def self.search(query)
     if query.present? 
       # query = query.downcase
-      where('CITY like ? ', "%#{query}%").or(where('STATE like ? ', "%#{query}%")).or(where('STATE like ? ', "%#{query}%") 
+      where('CITY like ? ', "%#{query}%").or(where('STATE like ? ', "%#{query}%")).or(where('STATE like ? ', "%#{query}%")) 
     else 
       flash[:message] = "There are no events in that location!"
       #self.all 

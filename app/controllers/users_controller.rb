@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
     def home 
       @events = Event.search(params[:query])
+      render 'home'
     end
   
     def new
@@ -46,8 +47,12 @@ class UsersController < ApplicationController
 
     def update 
       @user = current_user
-      @user.update(user_params[:name])
-      redirect_to user_path(@user)
+      if @user.update(user_params)
+        redirect_to user_path(@user)
+      else 
+        flash[:message] = "Unable to update. Please enter a valid password"
+        redirect_to edit_user_path(@user)
+      end
     end
   
     private

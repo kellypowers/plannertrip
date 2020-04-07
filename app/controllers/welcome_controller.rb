@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
   #skip_before_action :verified_user
     def home
       if logged_in?
-        redirect_to user_path(current_user)
+        render '/users/home'
       else
         render 'home'
       end

@@ -1,4 +1,6 @@
-
+<%if flash[:message].present?%>
+    <%=flash[:message]%>
+<%end%>
   <%= form_for user do |f| %>
     <% if user.errors.any? %>
       <div id="error_explanation">

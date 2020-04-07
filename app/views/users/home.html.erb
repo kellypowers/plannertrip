@@ -14,7 +14,7 @@
 
 
 
-
+<%if @user.events.any?%>
 <h1 class="font-bold"><%=@user.name%>'s Events</h1>
 <br>
     <ul>
@@ -23,7 +23,7 @@
             <br>
         <%end%>
     </ul>
-   
+<%end%>
 <%=link_to "Create new event", '/events/new'%>
 <br>
 <br>

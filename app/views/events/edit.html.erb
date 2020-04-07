@@ -5,11 +5,7 @@
   <%= link_to "Delete", @event, method: :delete, data: { confirm: "Really?" } %>
 </div>
 
-<% @event.addresses.each do |add| %>
-<div class="event_address">
-  <%= link_to "Delete address #{add.full_address}", "addresses/#{add.id}", method: :delete, data: { confirm: "Really?" } %>
-</div>
-<% end %>
+
 
 <%#how can i delete some addresses associated with events? - view the show then delete. %>  
 <%# "/events/#{@event.id}/addresses/#{add.id}" %>
