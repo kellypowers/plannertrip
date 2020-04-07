@@ -5,6 +5,7 @@ class CreateEvents < ActiveRecord::Migration[6.0]
       t.string :category
       t.string :description
       t.integer :user_id
+      t.datetime :datetime
       
       
     end

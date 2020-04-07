@@ -14,11 +14,12 @@ class EventsController < ApplicationController
     end
 
     def create
-        @event = Event.new(event_params)
-        puts "first : #{@event.addresses}"
+        @event = Event.new
+        #puts "first : #{@event.addresses}"
         # @address = Address.new
         # @event.addresses << @address 
-        #@event.update(event_params)
+        @event.addresses.build
+        @event.update(event_params)
         puts "event address    #{@event.addresses}"
         @event.user_id = current_user.id
         if @event.save
@@ -53,12 +54,12 @@ class EventsController < ApplicationController
         #raise params.inspect  <ActionController::Parameters {"_method"=>"patch", "authenticity_token"=>"gZJ9GRBDdlwgervAfjdzcejJYjpkMNRcmzIFzdRFzFpwrIteKicCechRmDa69gTtpsumHHgtemxzC2rqbq+S1Q==", "event"=>{"address"=>{"street"=>"740 s columb", "city"=>"Phila", "state"=>"PA", "country"=>""}}, "commit"=>"Update Event", "controller"=>"events", "action"=>"update", "id"=>"7"} permitted: false>
         @event = Event.find(params[:id])
         if params[:address].present?  #if the update is in an address form, update / add address to event. if the address is already in the system, edit that address, else, build new one?
-            if @event.find_address(params[:address][:street])
-                @event.find_address(params[:address][:street]).update(params[:address])
-            else 
-                @event.addresses.build(params[:address])
-            end
-        elsif @event.update(params)  #else, update the event
+            # if @event.find_address(params[:event][:address][:street])
+            #     @event.find_address(params[:event][:address][:street]).update(params[:address])
+            # else 
+                @event.addresses.find_or_create(params[:event][:address])
+            #  end
+        elsif @event.update(event_params)  #else, update the event
            #@event.addresses.build(event_params[:addresses_attributes])
           redirect_to event_path(@event), :notice => "Update completed"
         else
@@ -81,7 +82,7 @@ class EventsController < ApplicationController
     private
 
     def event_params
-        params.require(:event).permit(:name, :category, :description, :user_id, #address_id:[],
+        params.require(:event).permit(:name, :category, :description, :user_id, address_id:[],
             addresses_attributes: [
                 :street, 
                 :city, 

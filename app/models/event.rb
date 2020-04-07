@@ -4,12 +4,13 @@ class Event < ApplicationRecord
     belongs_to :user
     accepts_nested_attributes_for :addresses
 
-    # def addresses_attributes=(address_attributes)
-    #   address_attributes.values.each do |address_attribute|
-    #   address = Address.find_or_create_by(address_attribute)
-    #   self.addresses << address
-    # end
-  #end
+    #prevents duplicates... does not work. : #<Address::ActiveRecord_Associations_CollectionProxy:0x00007f9d9ae081e0>
+  #   def addresses_attributes=(address_attributes)
+  #     address_attributes.values.each do |address_attribute|
+  #     address = Address.find_or_create_by(address_attribute)
+  #     self.addresses << address
+  #   end
+  # end
 
   def find_address(street_ad)
     self.addresses.each do |ad|
@@ -18,6 +19,16 @@ class Event < ApplicationRecord
       else 
         false 
       end
+    end
+  end
+
+  def list_addresses
+    self.addresses.map{|i| i.full_address}
+  end
+
+  def geocoded_address 
+    self.list_addresses.each do |i|
+      Geocoder.search(i)
     end
   end
 

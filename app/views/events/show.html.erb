@@ -7,9 +7,10 @@ Event Category<%=@event.category%> <br>
 Event Description <%=@event.description%><br>
 Event Address <%@event.addresses.each do |add|%>
     <%=add.full_address%>
+    <%=add.geocode_address%>
 <%end%>
-
 <br>
+
  <%=link_to "Add Address to this Event", new_event_address_path(@event)%>
  <br>
  <%=link_to "Edit this Event", edit_event_path(@event) %>

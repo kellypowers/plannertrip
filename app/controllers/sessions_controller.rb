@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       
       
-      redirect_to user_path(@user)
+      redirect_to '/users/home'
       #@user = User.find_or_create_by_omniauth(auth_hash)
       #session[:user_id] = @user.id
       #redirect_to user_path(@user), flash[:message] = "You successfully logged in!" 

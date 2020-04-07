@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 2020_04_05_210120) do
     t.string "city"
     t.string "state"
     t.string "country"
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "event_addresses", force: :cascade do |t|
@@ -30,6 +32,7 @@ ActiveRecord::Schema.define(version: 2020_04_05_210120) do
     t.string "category"
     t.string "description"
     t.integer "user_id"
+    t.datetime "datetime"
   end
 
   create_table "users", force: :cascade do |t|

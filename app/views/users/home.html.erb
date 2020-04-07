@@ -1,1 +1,17 @@
-<h1>Hello <%=current_user.name%> </h1>
+
+<h1 class="font-bold"><%=@user.name%>'s Events</h1>
+<br>
+    <ul>
+        <%@user.events.each do |event|%>
+            <li><%=link_to event.name, event_path(event)%></li>
+            <br>
+        <%end%>
+    </ul>
+   
+<%=link_to "Create new event", '/events/new'%>
+<br>
+<br>
+<h2 class="font-bold"><%=@user.name%>'s Planners</h2>
+
+<%=link_to "Create new planner", '/planner/new'%>
+

@@ -21,12 +21,22 @@
   <div class="form-field">
     <%=f.text_field :name %>
   </div>
+  <%# <br>
+    <div class="form-label">
+    <%=f.label :datetime %>
+  <%# </div> %>
+  <%# <div class="form-field"> %>
+    <%#=f.datetime_select :datetime %>
+  <%# </div>  %>
+  <%# <ActionController::Parameters {"authenticity_token"=>"FIUd/J8SdKxvMTRPspeBa1vCZ6OutcsWyMhAW6woOGt0bYAiZrdwnYanvkbieJVh+QBGT6JI6VY/U4LsddrG4A==", "event"=><ActionController::Parameters {"user_id"=>"", "name"=>"Go to mountains", "datetime(1i)"=>"2020", "datetime(2i)"=>"4", "datetime(3i)"=>"7", "datetime(4i)"=>"22", "datetime(5i)"=>"22", "category"=>"trip", "description"=>"lalalla", "addresses_attributes"=>{"0"=>{"street"=>"Lake Road", "city"=>"Laporte", "state"=>"PA", "country"=>"USA"}}} permitted: false>, "commit"=>"Create Event", "controller"=>"events", "action"=>"create"} permitted: false> %>
+  <%# Unpermitted parameters: :datetime(1i), :datetime(2i), :datetime(3i), :datetime(4i), :datetime(5i) %>
   <br>
     <%# make this a drop down! %>
   <div class="form-label">
     <%=f.label :category %>
   </div>
   <div class="form-field">
+   <%#= f.collection_select :provider_id, Provider.order(:name),:id,:name, include_blank: true %>
     <%=f.text_field :category %>
   </div>
   <br>
