@@ -1,16 +1,28 @@
 class Event < ApplicationRecord
-    has_many :event_addresses, inverse_of: :address
-    has_many :addresses, through: :event_addresses 
-    belongs_to :user
-    accepts_nested_attributes_for :addresses
 
-    #prevents duplicates... does not work. : #<Address::ActiveRecord_Associations_CollectionProxy:0x00007f9d9ae081e0>
-  #   def addresses_attributes=(address_attributes)
-  #     address_attributes.values.each do |address_attribute|
-  #     address = Address.find_or_create_by(address_attribute)
-  #     self.addresses << address
-  #   end
-  # end
+   belongs_to :user
+   geocoded_by :full_address
+   after_validation :geocode, if: ->(obj){ obj.full_address.present?} #and obj.full_address_changed? }
+   reverse_geocoded_by :latitude, :longitude
+   after_validation :reverse_geocode
+   
+
+   def full_address 
+       [self.street, self.city, self.state, self.country].compact.join(', ')
+   end 
+
+   def get_coordinates
+       addr = self.full_address
+       results = Geocoder.search(addr)
+       #results.first.coordinates
+       puts "RESULTS IS #{results}"
+       results
+       #results.coordinates
+   end
+
+   def geocode_address
+       Geocoder.search(self.full_address)
+   end
 
   def find_address(street_ad)
     self.addresses.each do |ad|
@@ -53,10 +65,6 @@ class Event < ApplicationRecord
     
       
       #User.find(1).visitd_locations
-      
-      def full_address
-        self.street + " " + self.city + " " + self.state + " " + self.country
-      end
       
 
 

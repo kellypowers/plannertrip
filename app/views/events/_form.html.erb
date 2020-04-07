@@ -21,13 +21,19 @@
   <div class="form-field">
     <%=f.text_field :name %>
   </div>
-  <%# <br>
+  <br>
     <div class="form-label">
-    <%=f.label :datetime %>
-  <%# </div> %>
-  <%# <div class="form-field"> %>
-    <%#=f.datetime_select :datetime %>
-  <%# </div>  %>
+    <%=f.label :start_date_time %>
+  </div>
+  <div class="form-field">
+    <%=f.datetime_select :start_date_time %>
+   </div> 
+       <div class="form-label">
+    <%=f.label :end_date_time %>
+  </div>
+  <div class="form-field">
+    <%=f.datetime_select :end_date_time %>
+   </div> 
   <%# <ActionController::Parameters {"authenticity_token"=>"FIUd/J8SdKxvMTRPspeBa1vCZ6OutcsWyMhAW6woOGt0bYAiZrdwnYanvkbieJVh+QBGT6JI6VY/U4LsddrG4A==", "event"=><ActionController::Parameters {"user_id"=>"", "name"=>"Go to mountains", "datetime(1i)"=>"2020", "datetime(2i)"=>"4", "datetime(3i)"=>"7", "datetime(4i)"=>"22", "datetime(5i)"=>"22", "category"=>"trip", "description"=>"lalalla", "addresses_attributes"=>{"0"=>{"street"=>"Lake Road", "city"=>"Laporte", "state"=>"PA", "country"=>"USA"}}} permitted: false>, "commit"=>"Create Event", "controller"=>"events", "action"=>"create"} permitted: false> %>
   <%# Unpermitted parameters: :datetime(1i), :datetime(2i), :datetime(3i), :datetime(4i), :datetime(5i) %>
   <br>
@@ -44,8 +50,34 @@
     <%=f.label :description %>
   </div>
   <div class="form-field">
-    <%=f.text_field :description %>
+    <%=f.text_area :description %>
   </div>
+    <div class="form-label">
+        <%=f.label :street %>
+    </div>
+    <div class="form-field">
+        <%=f.text_field :street %>
+    </div>
+    <br>
+    <div class="form-label">
+        <%=f.label :city %>
+    </div>
+    <div class="form-field">
+        <%=f.text_field :city %>
+    </div>
+    <div class="form-label">
+        <%=f.label :state %>
+    </div>
+    <div class="form-field">
+        <%=f.text_field :state %>
+    </div>
+    <br>
+      <div class="form-label">
+        <%=f.label :country %>
+    </div>
+    <div class="form-field">
+        <%=f.text_field :country %>
+    </div>
   
     <br>
   <div class="submit-button">
