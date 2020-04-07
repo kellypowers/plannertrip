@@ -12,8 +12,14 @@ Rails.application.routes.draw do
 
 
   
-  resources :users
+  resources :users do 
+    resources :planners do 
+      resources :events 
+    end
+  end
 
   resources :events 
+
+  
 
 end

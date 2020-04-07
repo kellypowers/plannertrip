@@ -1,3 +1,19 @@
+<h1> Search events at your next destination! Where would you like to go?  </h1>
+
+    <%=form_tag events_path, method: :get do %>
+        <%=text_field_tag :query, params[:query]%>
+        <%=submit_tag "search", name: nil%>
+    <%end%>
+    <% if flash[:message] %>
+        <div class="notice">
+            <%= flash[:message] %>
+        </div>
+  <% end %>
+
+
+
+
+
 
 <h1 class="font-bold"><%=@user.name%>'s Events</h1>
 <br>

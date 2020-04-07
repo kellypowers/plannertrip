@@ -1,6 +1,10 @@
 require 'pry'
 class UsersController < ApplicationController
     skip_before_action :verified_user, only: [:new, :create]
+
+    def home 
+      @events = Event.search(params[:query])
+    end
   
     def new
       @user = User.new

@@ -6,7 +6,9 @@ class User < ApplicationRecord
     validates :email, presence: true, uniqueness: true
     #validates :username, presence: true, uniqueness: true 
     validates :name, presence: true
-    has_many :events
+    has_many :planners 
+    has_many :events #, through: :planners
+    #has_many :events, through: :ratings
 
 
     # def self.find_or_create_by_omniauth(auth_hash)

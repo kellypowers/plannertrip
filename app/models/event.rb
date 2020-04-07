@@ -1,10 +1,12 @@
 class Event < ApplicationRecord
-
-   belongs_to :user
-   geocoded_by :full_address
-   after_validation :geocode, if: ->(obj){ obj.full_address.present?} #and obj.full_address_changed? }
-   reverse_geocoded_by :latitude, :longitude
-   after_validation :reverse_geocode
+  has_many :users
+  has_many :planners, through: :users
+  has_many :ratings 
+  #belongs_to :user #? 
+  geocoded_by :full_address
+  after_validation :geocode, if: ->(obj){ obj.full_address.present?} #and obj.full_address_changed? }
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :reverse_geocode
    
 
    def full_address 
@@ -34,13 +36,23 @@ class Event < ApplicationRecord
     end
   end
 
-  def list_addresses
-    self.addresses.map{|i| i.full_address}
+  def self.list_addresses
+    Event.all.map{|i| i.full_address.downcase}
   end
 
   def geocoded_address 
-    self.list_addresses.each do |i|
+    Event.list_addresses.each do |i|
       Geocoder.search(i)
+    end
+  end
+
+  def self.search(query)
+    if query.present? 
+      # query = query.downcase
+      where('CITY like ? ', "%#{query}%").or(where('STATE like ? ', "%#{query}%")).or(where('STATE like ? ', "%#{query}%") 
+    else 
+      flash[:message] = "There are no events in that location!"
+      #self.all 
     end
   end
 
