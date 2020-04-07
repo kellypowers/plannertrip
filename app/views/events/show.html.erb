@@ -5,7 +5,7 @@ Event Name <%=@event.name%>
 
 Event Category<%=@event.category%> <br>
 Event Description <%=@event.description%><br>
-Event Address <%@event.addresses.each do |add|%>
+Event Address <%if !@event.addresses.any? do |add|%>
     <%=add.full_address%>
     <%=add.geocode_address%>
 <%end%>

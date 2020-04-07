@@ -46,9 +46,57 @@
   <div class="form-field">
     <%=f.text_field :description %>
   </div>
-  
+  <br>
+
+
+   <%= f.fields_for :addresses, event.addresses do |af| %>
+   <ul>
+    <li>
+
+    <div class="form-label">
+        <%=af.label :street %>
+    </div>
+    <div class="form-field">
+        <%=af.text_field :street %>
+    </div>
+    <br>
+
+    <div class="form-label">
+        <%=af.label :city %>
+    </div>
+    <div class="form-field">
+        <%=af.text_field :city %>
+    </div>
+    <br>
+
+    <div class="form-label">
+        <%=af.label :state %>
+    </div>
+    <div class="form-field">
+        <%=af.text_field :state %>
+    </div>
+    <br>
+      <div class="form-label">
+        <%=af.label :country %>
+    </div>
+    <div class="form-field">
+        <%=af.text_field :country %>
+    </div>
+    
+    </li>
+    <%end%>
+    </ul>
     <br>
   <div class="submit-button">
     <%=f.submit%>
   </div>
   <% end %>
+
+
+  <%# join users/ratings of people who have been %>
+
+  <%# will have a join table with the user who created it and those who also go, can rate  %>
+  <%# join table for users who star it  %>
+  <%# join table for categories?  %>
+  <%# joiin tavle with location ^^<< can be searched by these things, %>
+  <%# join with each of the lists it can be added to %>
