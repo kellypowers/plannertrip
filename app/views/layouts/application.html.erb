@@ -23,7 +23,7 @@
         <%= link_to "Log Out", logout_path, method: :delete %>
       </button>
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4" >
-        <%#= link_to "Account Info", user_path(current_user) %>
+        <%= link_to "Account Info", "/users/#{current_user.id}" %>
       </button>
     <%else%>
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4" >

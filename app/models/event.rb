@@ -1,12 +1,11 @@
 class Event < ApplicationRecord
+   cattr_accessor :current_user
    has_many :user_events
    belongs_to :user
    has_many :users, through: :user_events
-   has_one :author_id
-  #belongs_to :user
-  # has_many :planners, through: :users
-  has_many :ratings 
-  #belongs_to :user #? 
+   #rails scope with arguments
+   scope :search_location, -> (query) {where('CITY like ? ', "%#{query}%").or(where('STATE like ? ', "%#{query}%")).or(where('STATE like ? ', "%#{query}%")) }
+  #has_many :ratings 
   geocoded_by :full_address
   after_validation :geocode, if: ->(obj){ obj.full_address.present?} #and obj.full_address_changed? }
   reverse_geocoded_by :latitude, :longitude
@@ -19,28 +18,29 @@ class Event < ApplicationRecord
        [self.street, self.city, self.state, self.country].compact.join(', ')
    end 
 
-   def get_coordinates
-       addr = self.full_address
-       results = Geocoder.search(addr)
-       #results.first.coordinates
-       puts "RESULTS IS #{results}"
-       results
-       #results.coordinates
-   end
+  #  def get_coordinates
+  #      addr = self.full_address
+  #      results = Geocoder.search(addr)
+  #      #results.first.coordinates
+  #      puts "RESULTS IS #{results}"
+  #      results
+  #      #results.coordinates
+  #  end
 
    def geocode_address
        Geocoder.search(self.full_address)
    end
 
-  def find_address(street_ad)
-    self.each do |ad|
-      if ad.street == street_ad
-        return ad 
-      else 
-        false 
-      end
-    end
-  end
+   #
+  # def find_address(street_ad)
+  #   self.each do |ad|
+  #     if ad.street == street_ad
+  #       return ad 
+  #     else 
+  #       false 
+  #     end
+  #   end
+  # end
 
   def self.list_addresses
     Event.all.map{|i| i.full_address.downcase}
@@ -52,17 +52,18 @@ class Event < ApplicationRecord
     end
   end
 
-  def self.search(query)
-    if query.present? 
-      # query = query.downcase
-      where('CITY like ? ', "%#{query}%").or(where('STATE like ? ', "%#{query}%")).or(where('STATE like ? ', "%#{query}%")) 
-    else 
-      flash[:message] = "There are no events in that location!"
-      #self.all 
-    end
+  def belongs_to_user(current_user)
+    self.user == current_user ? true : false 
   end
 
 
+  # def already_added?
+  #   if current_user.added_events.valid?
+  #     current_user.added_events.include?(@event) ? true : false 
+  #   else 
+  #     false
+  #   end
+  # end
 
     
    

@@ -10,27 +10,35 @@
   <p>Event Description: <%=@event.comment%></p><br>
   <p>Event Address: <%=@event.full_address%></p><br>
 </div>
-<div>
-  <br>
-  <%=link_to "Edit this Event", edit_event_path(@event) %>
-  <br>
-</div>
-<div class="form">
-  <%= form_tag event_path(@event.id), method: "delete" do %>
-    <%= submit_tag "Delete #{@event.name}" %>
-  <% end %>
-</div>
-<div class="form">
-  <%= form_tag user_event_path(@event.id), method: "post" do %>
-  <br>
-    <%label_tag "Comment" %>
-    <%=text_field_tag :comment %>  <br>
-    <%= submit_tag "Add #{@event.name} to your events" %>
-  <% end %>
-  <br>
-</div>
 
-<div class="map">
-  <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@event.latitude},#{@event.longitude}&markers=#{@event.latitude},#{@event.longitude}&zoom=7&size=640x400&key=#{ENV['MY_KEY']}", #!!!!add key here
+<div>
+  <%if @event.belongs_to_user(current_user)%>
+    <div>
+    <br>
+      <%=link_to "Edit this Event", edit_event_path(@event) %>
+    <br>
+    </div>
+    <div class="form">
+      <%= form_tag event_path(@event.id), method: "delete" do %>
+        <%= submit_tag "Delete #{@event.name}" %>
+      <% end %>
+    </div>
+  <%end%>
+</div>
+<%# want this part shown only if event is not already in the user's events, and if user is not event.user (one who made it) %>
+<%if !current_user.event_already_added?(@event) || @event.belongs_to_user(current_user)%>
+  <div class="form">
+    <%= form_tag user_event_path(@event.id), method: "post" do %>
+    <br>
+      <%label_tag "Comment" %>
+      <%=text_field_tag "comment", :comment %>  <br>
+      <%= submit_tag "Add #{@event.name} to your events" %>
+    <% end %>
+    <br>
+  </div>
+<%end%>
+
+<div class="flex justify-center">
+  <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@event.latitude},#{@event.longitude}&markers=#{@event.latitude},#{@event.longitude}&zoom=15&size=640x400&key=#{ENV['MY_KEY']}", #!!!!add key here
               class: 'img-fluid img-rounded', alt: "#{@event.name} on the map"%>
 </div>

@@ -3,12 +3,36 @@
       <%=flash[:message]%>
   <%end%>
 </div>
+<%if @events.present?%>
 <div>
+<ul>
   <% @events.each do |event| %>
+    <div class="event">
+      <li><%=link_to event.name, event_path(event) %></li>
+    </div>
+  <% end %>
+</div>
+</ul>
+<%end%>
+<% if @userevents.present?%>
+  <div>
+  Your Events: <br>
+    <% @userevents.each do |event| %>
+      <div class="event">
+        <span><%=link_to event.name, event_path(event) %></span>
+      </div>
+    <% end %>
+  </div>
+<%end%>
+<%if @events_added.present?%>
+<div>
+  Events You added: <br>
+  <% @events_added.each do |event| %>
     <div class="event">
       <span><%=link_to event.name, event_path(event) %></span>
     </div>
   <% end %>
 </div>
+<%end%>
 
 <%# get a map in here that displays all? %>

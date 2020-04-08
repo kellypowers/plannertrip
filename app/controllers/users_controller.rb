@@ -3,13 +3,12 @@ class UsersController < ApplicationController
     skip_before_action :verified_user, only: [:new, :create]
 
     def home 
-      @events = Event.search(params[:query])
+      #@events = Event.search(params[:query])
       render 'home'
     end
   
     def new
       @user = User.new
-      #params.inspect
     end
   
     def create
