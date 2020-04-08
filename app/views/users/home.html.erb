@@ -13,21 +13,21 @@
 
 
 
+<div class="">
+    <br>
+    <%=link_to "View Your Events", user_events_path(current_user)%></li>
+    <br>
+</div>
 
-<%#if @user.events.any?%>
-<%# <h1 class="font-bold"><%=@user.name  's Events</h1>%>
+<div class="">
+    <%=link_to "Create new event", '/events/new'%>
+</div>
+
 <br>
-    <%# <ul> %>
-        <%#@user.events.each do |event|%>
-            <li><%=link_to "View Your Events", user_events_path(current_user)%></li>
-            <br>
-        <%#end%>
-    <%# </ul> %>
-<%#end%>
-<%=link_to "Create new event", '/events/new'%>
-<br>
-<br>
+
+
 <h2 class="font-bold"><%=@user.name%>'s Planners</h2>
 
-<%=link_to "Create new planner", '/planner/new'%>
-
+<div> 
+    <%=link_to "Create new planner", '/planner/new'%>
+</div>
