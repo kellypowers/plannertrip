@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
-  # has_many :user_events
-  # has_many :users, through: :user_events
-  belongs_to :user
+   has_many :user_events
+   has_many :users, through: :user_events
+  #belongs_to :user
   # has_many :planners, through: :users
   has_many :ratings 
   #belongs_to :user #? 
@@ -10,6 +10,8 @@ class Event < ApplicationRecord
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
    
+
+  
 
    def full_address 
        [self.street, self.city, self.state, self.country].compact.join(', ')

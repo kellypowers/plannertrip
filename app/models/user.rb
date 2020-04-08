@@ -7,11 +7,12 @@ class User < ApplicationRecord
     #validates :username, presence: true, uniqueness: true 
     validates :name, presence: true
     has_many :planners 
-    has_many :events
+    has_many :user_events
+    has_many :events, through: :user_events
     # has_many :ratings, through: :events
     #has_many :events, through: :ratings
     has_many :ratings 
-    has_many :events, through: :planners #i dont know
+    #has_many :events, through: :planners #i dont know
 
 
     # def self.find_or_create_by_omniauth(auth_hash)

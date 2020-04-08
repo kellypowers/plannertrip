@@ -5,18 +5,27 @@
 Event Name <%=@event.name%>
 <br>
 
-Event Category<%=@event.category%> <br>
-Event Description <%=@event.description%><br>
-Event Address <%=@event.full_address%>
+Event Category: <%=@event.category%> <br>
+Event Description: <%=@event.comment%><br>
+Event Address: <%=@event.full_address%>
 
-<%form_for current_user do |f|%>
-  <%=f.collection_check_boxes, :planner_ids, current_user.planners, :id, :name %>
- <%=f.submit "Add this event to a planner"%>
+<%#form_for current_user do |f|%>
+  <%#=f.collection_check_boxes, :planner_ids, current_user.planners, :id, :name %>
+ <%#=f.submit "Add this to your events"%>
+ <%#end%>
  <br>
  <%=link_to "Edit this Event", edit_event_path(@event) %>
 <br>
 <%= form_tag event_path(@event.id), method: "delete" do %>
   <%= submit_tag "Delete #{@event.name}" %>
+<% end %>
+
+<%= form_tag user_event_path(@event.id), method: "post" do %>
+<br>
+<%#<%= label_tag :comment %>
+  Comment:  <%=text_field_tag :comment %>
+  <br>
+  <%= submit_tag "Add #{@event.name} to your events" %>
 <% end %>
 
 

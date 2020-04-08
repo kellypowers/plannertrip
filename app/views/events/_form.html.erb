@@ -23,19 +23,7 @@
   <div class="form-field">
     <%=f.text_field :name %>
   </div>
-  <br>
-    <div class="form-label">
-    <%=f.label :start_date_time %>
-  </div>
-  <div class="form-field">
-    <%=f.datetime_select :start_date_time %>
-   </div> 
-       <div class="form-label">
-    <%=f.label :end_date_time %>
-  </div>
-  <div class="form-field">
-    <%=f.datetime_select :end_date_time %>
-   </div> 
+  
   
   <%# Unpermitted parameters: :datetime(1i), :datetime(2i), :datetime(3i), :datetime(4i), :datetime(5i) %>
   <br>
@@ -49,10 +37,10 @@
   </div>
   <br>
   <div class="form-label">
-    <%=f.label :description %>
+    <%=f.label :comment %>
   </div>
   <div class="form-field">
-    <%=f.text_area :description %>
+    <%=f.text_area :comment %>
   </div>
     <div class="form-label">
         <%=f.label :street %>

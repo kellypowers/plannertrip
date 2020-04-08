@@ -10,7 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_01_194735) do
+ActiveRecord::Schema.define(version: 2020_04_07_202227) do
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.string "comment"
+    t.string "street"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address"
+  end
+
+  create_table "planners", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "event_id"
+    t.integer "rating"
+    t.string "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_events", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "event_id"
+    t.string "comment"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"

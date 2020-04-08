@@ -9,13 +9,11 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
-
+  post "/users/:id/events/:id" => 'events#add'
 
   
   resources :users do 
-    resources :planners do 
       resources :events 
-    end
   end
 
   resources :events 
