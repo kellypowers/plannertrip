@@ -1,6 +1,8 @@
 class Event < ApplicationRecord
    has_many :user_events
+   belongs_to :user
    has_many :users, through: :user_events
+   has_one :author_id
   #belongs_to :user
   # has_many :planners, through: :users
   has_many :ratings 

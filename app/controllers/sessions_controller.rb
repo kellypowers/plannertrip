@@ -10,23 +10,21 @@ class SessionsController < ApplicationController
       @user = User.find_or_create_by(uid: auth['uid']) do |u|
         u.name = auth['info']['name']
         u.email = auth['info']['email']
-
         u.password = SecureRandom.hex
       end 
       session[:user_id] = @user.id
-      
-      
-      redirect_to '/users/home'
+      redirect_to '/users/home', flash[:message] = "You successfully logged in!" 
       #@user = User.find_or_create_by_omniauth(auth_hash)
       #session[:user_id] = @user.id
       #redirect_to user_path(@user), flash[:message] = "You successfully logged in!" 
     elsif @user = User.find_or_create_by(email: params[:email])
       if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id # log in the user
-        redirect_to user_path(@user), flash[:message] = "You successfully logged in! Welcome, #{@user.name}!"
+        flash[:message] = "You successfully logged in! Welcome, #{@user.name}!"
+        redirect_to user_path(@user) 
       end
     else # present login form so user can try logging in again
-        flash[:message] = "Your login attempt was unsuccessful. Please enter a valid email and password combination."
+        flash[:message] = "Your login attempt was unsuccessful. Please enter a valid email and password combination or try signing up."
         render :new
     end
   end

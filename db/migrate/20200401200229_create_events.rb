@@ -11,10 +11,7 @@ class CreateEvents < ActiveRecord::Migration[6.0]
       t.float :latitude
       t.float :longitude
       t.string :address
-  
-
-      
-      
+      t.belongs_to :user
     end
   end
 end

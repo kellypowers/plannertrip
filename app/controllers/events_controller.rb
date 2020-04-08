@@ -7,14 +7,18 @@ class EventsController < ApplicationController
     end
 
     def index 
-        @events = Event.all
+        if params[:query]
+            #use a scope method to get events that match the query (in the Event model)
+            @events = Event.all
+        else
+            @events = current_user.added_events
+        end
     end
 
     def create
-        @event = Event.new(event_params)
-        puts "current user is #{current_user}"
-        #need different method for when user creates the event???? right now any events seeded are aautomatically linked to user
-        UserEvent.create(user_id: current_user.id, event_id: @event.id, comment: event_params[:comment])
+        @event = current_user.events.build(event_params)
+        #need different method for when user creates the event? right now any events seeded are aautomatically linked to user
+        UserEvent.create(comment: event_params[:comment])
         #@event.users << current_user 
         #UserEvent.last.comment = event_params[:comment]
         if @event.save
@@ -36,7 +40,6 @@ class EventsController < ApplicationController
         @event = Event.find_by(params[:id])
         if current_user.events.include?(@event)
             redirect_to user_event_path(current_user, @event)
-            #why does this change the user id in the url?????
         else 
             UserEvent.create(user_id: current_user.id, event_id: @event.id, comment: params[:comment])
             redirect_to user_event_path(current_user, @event)
@@ -53,8 +56,8 @@ class EventsController < ApplicationController
         end
       end
 
+      #who do i want to be able to edit events? events can be added and seen by everyone... they don't belong to anyone.. 
     def edit 
-        #@user = current_user
     end
 
     def destroy
@@ -65,7 +68,7 @@ class EventsController < ApplicationController
     private
 
     def event_params
-        params.require(:event).permit(:name, :category, :comment, #:user_ids, #do i want userid? 
+        params.require(:event).permit(:name, :category, :comment, #:author_id, #:user_ids, #do i want userid? 
                 :street, 
                 :city, 
                 :state, 

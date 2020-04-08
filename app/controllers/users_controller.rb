@@ -22,7 +22,7 @@ class UsersController < ApplicationController
         redirect_to user_path(@user)
       else
         #binding.pry
-        #flash[:message] = "did not work"
+        flash[:message] = "Unable to create"
         render 'new'
       end
     end
