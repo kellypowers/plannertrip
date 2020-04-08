@@ -1,31 +1,36 @@
-<%if flash[:message].present?%>
-    <%=flash[:message]%>
-<%end%>
+<div class="text-red">
+  <%if flash[:message].present?%>
+      <%=flash[:message]%>
+  <%end%>
+</div>
 
-Event Name <%=@event.name%>
-<br>
-
-Event Category: <%=@event.category%> <br>
-Event Description: <%=@event.comment%><br>
-Event Address: <%=@event.full_address%>
-
-<%#form_for current_user do |f|%>
-  <%#=f.collection_check_boxes, :planner_ids, current_user.planners, :id, :name %>
- <%#=f.submit "Add this to your events"%>
- <%#end%>
- <br>
- <%=link_to "Edit this Event", edit_event_path(@event) %>
-<br>
-<%= form_tag event_path(@event.id), method: "delete" do %>
-  <%= submit_tag "Delete #{@event.name}" %>
-<% end %>
-
-<%= form_tag user_event_path(@event.id), method: "post" do %>
-<br>
-<%#<%= label_tag :comment %>
-  Comment:  <%=text_field_tag :comment %>
+<div>
+  <p>  Event Name <%=@event.name%> </p><br>
+  <p>Event Category: <%=@event.category%></p> <br>
+  <p>Event Description: <%=@event.comment%></p><br>
+  <p>Event Address: <%=@event.full_address%></p><br>
+</div>
+<div>
   <br>
-  <%= submit_tag "Add #{@event.name} to your events" %>
-<% end %>
+  <%=link_to "Edit this Event", edit_event_path(@event) %>
+  <br>
+</div>
+<div class="form">
+  <%= form_tag event_path(@event.id), method: "delete" do %>
+    <%= submit_tag "Delete #{@event.name}" %>
+  <% end %>
+</div>
+<div class="form">
+  <%= form_tag user_event_path(@event.id), method: "post" do %>
+  <br>
+    <%label_tag "Comment" %>
+    <%=text_field_tag :comment %>  <br>
+    <%= submit_tag "Add #{@event.name} to your events" %>
+  <% end %>
+  <br>
+</div>
 
-
+<div class="map">
+  <%#= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@event.latitude},#{@event.longitude}&markers=#{@event.latitude},#{@event.longitude}&zoom=7&size=640x400&key=", #!!!!add key here
+              class: 'img-fluid img-rounded', alt: "#{@event.name} on the map"%>
+</div>

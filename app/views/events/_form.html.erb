@@ -1,21 +1,23 @@
-<%if flash[:message].present?%>
-    <%=flash[:message]%>
-<%end%>
-  <%= form_for event do |f| %>
-      <% if event.errors.any? %>
+<div class="text-red">
+  <%if flash[:message].present?%>
+      <%=flash[:message]%>
+  <%end%>
+<div>
+<div class="form">
+<%= form_for event do |f| %>
+    <% if event.errors.any? %>
       <div id="error_explanation">
-    <h2>
-      <%= pluralize(event.errors.count, "error") %>
-      prohibited this post from being saved:
-    </h2>
- 
-    <ul>
-    <% event.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <h2>
+          <%= pluralize(event.errors.count, "error") %>
+          prohibited this post from being saved:
+        </h2> 
+        <ul>
+        <% event.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     <% end %>
-    </ul>
-    <% end %>
-
  <%#=f.hidden_field :user_ids%>
   <div class="form-label">
     <%=f.label :name %>
@@ -23,8 +25,6 @@
   <div class="form-field">
     <%=f.text_field :name %>
   </div>
-  
-  
   <%# Unpermitted parameters: :datetime(1i), :datetime(2i), :datetime(3i), :datetime(4i), :datetime(5i) %>
   <br>
     <%# make this a drop down! %>
@@ -32,7 +32,7 @@
     <%=f.label :category %>
   </div>
   <div class="form-field">
-   <%#= f.collection_select :provider_id, Provider.order(:name),:id,:name, include_blank: true %>
+   <%#= f.collection_select  %>
     <%=f.text_field :category %>
   </div>
   <br>
@@ -68,9 +68,9 @@
     <div class="form-field">
         <%=f.text_field :country %>
     </div>
-  
     <br>
-  <div class="submit-button">
-    <%=f.submit%>
-  </div>
+    <div class="submit-button">
+      <%=f.submit%>
+    </div>
   <% end %>
+</div>

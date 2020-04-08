@@ -1,11 +1,14 @@
-<%if flash[:message].present?%>
-    <%=flash[:message]%>
-<%end%>
-
-<% @events.each do |event| %>
-<div class="event">
-  <span><%=link_to event.name, event_path(event) %></span>
-  <%#= link_to "Delete", event, method: :delete, data: { confirm: "Really?" } %>
-  <%# get a map in here that displays all? %>
+<div class="text-red">
+  <%if flash[:message].present?%>
+      <%=flash[:message]%>
+  <%end%>
 </div>
-<% end %>
+<div>
+  <% @events.each do |event| %>
+    <div class="event">
+      <span><%=link_to event.name, event_path(event) %></span>
+    </div>
+  <% end %>
+</div>
+
+<%# get a map in here that displays all? %>

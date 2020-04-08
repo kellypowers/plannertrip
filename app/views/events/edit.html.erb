@@ -1,7 +1,9 @@
-<%=render partial: "form", locals: {event: @event}%>
 
+<div>
+  <%=render partial: "form", locals: {event: @event}%>
+</div>
 
-<div class="event">
+<div class="delete">
   <%= link_to "Delete", @event, method: :delete, data: { confirm: "Really?" } %>
 </div>
 
