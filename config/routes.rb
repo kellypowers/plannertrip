@@ -9,14 +9,17 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
-  post "/users/:id/events/:id" => 'events#add'
+  post "/users/:id/events/:id" => 'events#add' #do i still need this? should add from just events/:id
 
   
   resources :users do 
       resources :events 
   end
 
-  resources :events 
+  resources :events do 
+    resources :feedbacks 
+  end
+
 
   
 

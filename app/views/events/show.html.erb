@@ -10,8 +10,35 @@
   <p>Event Description: <%=@event.comment%></p><br>
   <p>Event Address: <%=@event.full_address%></p><br>
 </div>
+<br>
+<%if @event.average_rating.present?%>
+  <p> Average rating: <%= @event.average_rating%>
+<%end%>
+<br>
+<br>
 
+<%=@event.feedbacks.count%> Comments:
+  <% @event.feedbacks.each do |feedback| %>
+  <ul>
+    <li><%= link_to feedback.user.name, user_path(feedback.user) %> said
+    <%= feedback.content %>
+    <%#if feedback.rating.any?%>
+      <%=feedback.user.name%> rated <%=@event.name%> a <%=feedback.rating%> out of 10. </li>
+    <%#end%>
+    <%if feedback.user == current_user %>
+      <%=link_to "edit this comment", edit_event_feedback_path(@event, feedback)%>
+      <%=form_tag event_feedback_path(@event, feedback), method: "delete" do%>
+        <%=submit_tag "delete your comment"%>
+      <%end%>
+      <%end%>
+    <ul>
+  <% end %>
 <div>
+<br>
+<div class="">
+  <%=link_to "Add A Comment and Rate this Event", new_event_feedback_path(@event)%>
+</div>
+<br>
   <%if @event.belongs_to_user(current_user)%>
     <div>
     <br>

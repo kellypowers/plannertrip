@@ -1,34 +1,47 @@
-<div class="text-red">
-  <%if flash[:message].present?%>
-      <%=flash[:message]%>
-  <%end%>
-</div>
+
+
 <%if @events.present?%>
-<div>
-<ul>
-  <% @events.each do |event| %>
-    <div class="event">
-      <li><%=link_to event.name, event_path(event) %></li>
-    </div>
-  <% end %>
-</div>
-</ul>
+  <div>
+  <h1> The following events are listed for:</h1> 
+    <h1 class= "font-bold "> 
+      <%=params[:query]%> 
+    </h1>
+  <br>
+    <ul>
+      <% @events.each do |event| %>
+        <div class=" text-center font-bold text-lg text-blue-800 hover:text-blue-900">
+          <li><%=link_to event.name, event_path(event) %></li>
+        </div>
+      <% end %>
+    </ul>
+  </div>
 <%end%>
+<br>
+<br>
+<%if params[:query].present? && @events.none?%>
+  <div class="inline-block align-baseline text-center font-bold text-lg text-blue-800 hover:text-blue-900">
+    <%=link_to "Add your own event!", new_event_path%>
+  </div>
+<%end%>
+
+<br>
 <% if @userevents.present?%>
   <div>
   Your Events: <br>
     <% @userevents.each do |event| %>
-      <div class="event">
+      <div class="inline-block align-baseline text-center font-bold text-lg text-blue-800 hover:text-blue-900">
         <span><%=link_to event.name, event_path(event) %></span>
       </div>
     <% end %>
   </div>
 <%end%>
+<br>
+<br>
 <%if @events_added.present?%>
 <div>
   Events You added: <br>
   <% @events_added.each do |event| %>
-    <div class="event">
+    <div class="inline-block align-baseline text-center font-bold text-lg text-blue-800 hover:text-blue-900">
       <span><%=link_to event.name, event_path(event) %></span>
     </div>
   <% end %>

@@ -1,40 +1,59 @@
-<h1 class="font-bold  text-center ">Log in </h1>
-<%if flash[:message].present?%>
-    <%=flash[:message]%>
-<%end%>
-<br>
-<br>
+<h1 class="font-bold  text-center ">
+    Log in 
+</h1>
 
-
-<br>
-<div class=" w-full max-w-xs">
-<div class="md:flex md:items-center bg-white shadow-md rounded py-10 px-8 pt-6 pb-8 mb-10">
-<div class=" mb-4">
-    <%=form_tag login_path do %>
-        <div class="block text-gray-700 text-sm font-bold mb-2">
-            <%=label_tag :email, "Enter Your Email"%>
-        </div>
-        <div class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username">
-            <%=text_field_tag :email%>
-        </div>
-        <br>
-        <div class="block text-gray-700 text-sm font-bold mb-2">
-            <%=label_tag :password, "Enter Your Password"%>
-        </div>
-        <div class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username">
-            <%=password_field_tag :password%>
-        </div>
-        <br>
-        <div class="bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            <%=submit_tag "log in", class:"bg-blue-500 hover:bg-blue-700 font-bold"%>
-        </div>
-        <p class="text-center">
-            or
-        </p>
-        <div class="bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            <%=link_to(controller: 'users', action: 'new') {'sign up'}%>
-        </div>
+<div class="text-red">
+    <%if flash[:message].present?%>
+        <%=flash[:message]%>
     <%end%>
+</div>
+<br>
+<br>
+
+<div class="flex justify-center">
+<div class="  w-full max-w-xs">
+    <div class="md:flex md:items-center bg-white shadow-md rounded py-10 px-8 pt-6 pb-8 mb-10">
+        <div class=" px-10 mb-4">
+            <%=form_tag login_path do %>
+                <% if @user.errors.any? %>
+                    <div id="error_explanation">
+                    <h2>There were some errors:</h2>
+                    <ul>
+                        <% @user.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                        <% end %>
+                    </ul>
+                    </div>
+                <% end %>
+            <div class="field<%='field_with_errors' if @user.errors[:email].any?%>">
+                <div class="block text-gray-700 text-sm font-bold mb-2">
+                    <%=label_tag :email, "Enter Your Email"%>
+                </div>
+                <div class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username">
+                    <%=text_field_tag :email%>
+                </div>
+            </div>
+            <br>
+            <div class="field<%='field_with_errors' if @user.errors[:password].any?%>">
+                <div class="block text-gray-700 text-sm font-bold mb-2">
+                    <%=label_tag :password, "Enter Your Password"%>
+                </div>
+                <div class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username">
+                    <%=password_field_tag :password%>
+                </div>
+            </div>
+                <br>
+                <div class="bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    <%=submit_tag "log in", class:"bg-blue-500 hover:bg-blue-700 font-bold"%>
+                </div>
+                <p class="text-center">
+                    or
+                </p>
+                <div class="bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    <%=link_to(controller: 'users', action: 'new') {'sign up'}%>
+                </div>
+            <%end%>
+        </div>
     </div>
 </div>
 </div>

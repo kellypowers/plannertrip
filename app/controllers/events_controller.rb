@@ -9,6 +9,9 @@ class EventsController < ApplicationController
     def index 
         if params[:query]
             @events = Event.search_location(params[:query])
+            if @events.none?
+                flash[:message] = "There are no events for this location yet"
+            end
             #use a scope method to get events that match the query (in the Event model)
             #@events = Event.all
         else
@@ -62,9 +65,22 @@ class EventsController < ApplicationController
         if @event.user == current_user
             @event.update(event_params)  
           redirect_to event_path(@event), :notice => "Update completed"
+        elsif params[:event][:feedback]
+            @comment = Feedback.new(user_id: current_user.id, event_id: @event.id, content: params[:event][:feedback][:content], rating: params[:event][:feedback][:rating])
+            if @comment.save 
+                flash[:message] = "Comment added"
+                redirect_to event_path(@event)
+            else 
+                puts "#{@feedback}"
+            @feedback.errors.full_messages.each do |msg|
+                puts "#{msg}"
+            end
+                flash[:message] = "Unsuccessful"
+                redirect_to event_path(@event)
+            end
         else
             flash[:message] = "You can only update events you created."
-          render 'edit'
+          render 'show'
         end
       end
 
@@ -83,11 +99,7 @@ class EventsController < ApplicationController
     private
 
     def event_params
-        params.require(:event).permit(:name, :category, :comment, 
-                :street, 
-                :city, 
-                :state, 
-                :country)
+        params.require(:event).permit(:name, :category, :comment, :street, :city, :state, :country, feedbacks_attributes: [:content, :rating])
     end
 
     def set_event!

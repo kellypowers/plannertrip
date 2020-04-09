@@ -9,7 +9,7 @@ class User < ApplicationRecord
     has_many :added_events, through: :user_events, source: "event"
     # has_many :ratings, through: :events
     #has_many :events, through: :ratings
-    has_many :ratings 
+    has_many :feedbacks 
 
 
     # def self.find_or_create_by_omniauth(auth_hash)

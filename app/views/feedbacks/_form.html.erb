@@ -1,0 +1,29 @@
+
+
+    <%=form_for event do |f|%>
+         <%=f.hidden_field :user_id%>
+
+        <%= f.fields_for :feedback do |af| %>
+        <div class="form-label">
+            <%=af.label :content %>
+        </div>
+        <div class="form-field">
+            <%=af.text_area :content %>
+        </div>
+        <br>
+        <div class="form-label">
+            <%=af.label "Please rate from 1-10 with 10 being the best", :rating %>
+        </div>
+        <div class="form-field">
+            <%=af.text_field :rating %>
+        </div>
+        <br>
+
+        <%end%>
+    <br>
+    <div class="submit-button">
+        <%=f.submit "Add Comment"%>
+    </div>
+    <% end %>
+
+    <%# you can only update events you created.... need to fix this %>

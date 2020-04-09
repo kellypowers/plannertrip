@@ -1,28 +1,42 @@
-<h1> Search events at your next destination! Where would you like to go?  </h1>
-
-    <%=form_tag events_path, method: :get do %>
-        <%=text_field_tag :query, params[:query]%>
-        <%=submit_tag "search", name: nil%>
-    <%end%>
+<div>
     <% if flash[:message] %>
-        <div class="notice">
+        <div class="text-red">
             <%= flash[:message] %>
         </div>
-  <% end %>
+    <% end %>
+</div>
+
+
+<h1> Search events at your next destination! Where would you like to go?  </h1>
+<div>
+    <%=form_tag events_path, method: :get do %>
+        <div class="block text-gray-700 text-sm font-bold mb-2">
+            <%=label_tag "search a location"%>
+        </div>
+        <div class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username">
+            <%=text_field_tag :query, params[:query]%>
+        </div>
+        <div class="flex justify-center">
+        <div class=" w-1/5 bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 md-10 rounded focus:outline-none focus:shadow-outline">
+            <%=submit_tag "search", class:"bg-blue-500 hover:bg-blue-700 font-bold"%>
+        </div>
+        </div>
+    <%end%>
+<div>
 
 
 
-
-<div class="">
+<div class="inline-block align-baseline text-center font-bold text-lg text-blue-800 hover:text-blue-900">
     <br>
     <%=link_to "View Your Events", user_events_path(current_user)%></li>
     <br>
 </div>
-
-<div class="">
+<br>
+<br>
+<div class="inline-block align-baseline text-center font-bold text-lg text-blue-800 hover:text-blue-900">
     <%=link_to "Create new event", '/events/new'%>
 </div>
-
+<br>
 <br>
 
 

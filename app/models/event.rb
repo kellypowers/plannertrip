@@ -5,7 +5,8 @@ class Event < ApplicationRecord
    has_many :users, through: :user_events
    #rails scope with arguments
    scope :search_location, -> (query) {where('CITY like ? ', "%#{query}%").or(where('STATE like ? ', "%#{query}%")).or(where('STATE like ? ', "%#{query}%")) }
-  #has_many :ratings 
+  has_many :feedbacks 
+  accepts_nested_attributes_for :feedbacks
   geocoded_by :full_address
   after_validation :geocode, if: ->(obj){ obj.full_address.present?} #and obj.full_address_changed? }
   reverse_geocoded_by :latitude, :longitude
@@ -56,6 +57,14 @@ class Event < ApplicationRecord
     self.user == current_user ? true : false 
   end
 
+  def average_rating
+    sum = 0
+    self.feedbacks.all.each do |feedback|
+      sum += feedback.rating.to_i 
+    end
+    sum / (self.feedbacks.count)
+  end
+    
 
   # def already_added?
   #   if current_user.added_events.valid?
