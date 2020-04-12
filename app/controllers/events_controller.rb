@@ -62,10 +62,10 @@ class EventsController < ApplicationController
 
 
     def update
-        if @event.user == current_user
-            @event.update(event_params)  
-          redirect_to event_path(@event), :notice => "Update completed"
-        elsif params[:event][:feedback]
+        # if @event.user == current_user
+        #     @event.update(event_params)  
+        #   redirect_to event_path(@event), :notice => "Update completed"
+        if params[:event][:feedback]
             @comment = Feedback.new(user_id: current_user.id, event_id: @event.id, content: params[:event][:feedback][:content], rating: params[:event][:feedback][:rating])
             if @comment.save 
                 flash[:message] = "Comment added"
@@ -78,6 +78,9 @@ class EventsController < ApplicationController
                 flash[:message] = "Unsuccessful"
                 redirect_to event_path(@event)
             end
+        elsif @event.user == current_user
+            @event.update(event_params)  
+            redirect_to event_path(@event), :notice => "Update completed"
         else
             flash[:message] = "You can only update events you created."
           render 'show'

@@ -2,9 +2,11 @@
 <div>
   <%=render partial: "form", locals: {event: @event}%>
 </div>
-
-<div class="delete">
-  <%= link_to "Delete", @event, method: :delete, data: { confirm: "Really?" } %>
+<br>
+<div class="flex justify-center">
+  <div class=" w-2/5 bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 md-10 rounded focus:outline-none focus:shadow-outline">
+    <%= link_to "Delete", @event, method: :delete, data: { confirm: "Really?" } %>
+  </div>
 </div>
 
 
