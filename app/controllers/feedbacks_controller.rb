@@ -21,9 +21,9 @@ class FeedbacksController < ApplicationController
     end
 
     def destroy
-        raise params.inspect
+        #raise params.inspect
         event = Event.find_by_id(params[:event_id])
-        feedback = event.feedbacks.find_by_id(:id)
+        feedback = event.feedbacks.find_by_id(params[:id])
         feedback.destroy
         redirect_to event_path(event)
     end

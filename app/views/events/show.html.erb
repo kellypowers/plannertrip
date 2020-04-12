@@ -19,7 +19,7 @@
 <br>
 <div>
   <%if @event.feedbacks.any?%>  
-    <p> Average rating: <%= @event.average_rating%> </p>
+    <p class="underline text-bold"> Average rating: <%= @event.average_rating%> </p>
   <%else%>
     <p> There are no ratings for this event yet. </p>
   <%end%>
@@ -28,21 +28,42 @@
 <br>
 
 <div>
-<%=@event.feedbacks.count%> Comments:
+<%=@event.feedbacks.count%> Ratings:
   <% @event.feedbacks.each do |feedback| %>
   <ul>
-    <li><%= link_to feedback.user.name, user_path(feedback.user) %> said
-    <%= feedback.content %>
+    <li>
+    <div class="flex justify-center">
+      <div class="  w-full max-w-xs">
+          <div class="md:flex md:items-center bg-white shadow-md rounded py-10 px-8 pt-6 pb-8 mb-10">
+              <div class=" px-10 mb-4">
+
+      <span class=" text-center font-bold text-sm text-black-800 hover:text-blue-900">
+        <%= link_to feedback.user.name, user_path(feedback.user) %> 
+      </span> 
+    said
+    <div class="text-gray-800">
+    "<%= feedback.content %>"
     <%#if feedback.rating.any?%>
-      <%=feedback.user.name%> rated <%=@event.name%> a <%=feedback.rating%> out of 10. </li>
+    <br>
+      <span class="font-bold text-lg">
+        <%=feedback.rating%> 
+      </span>
+      out of 10. </li>
     <%#end%>
-    <%if feedback.user == current_user %>
-    <div class=" text-center font-bold text-lg text-blue-800 hover:text-blue-900">
-      <%=link_to "edit this comment", edit_event_feedback_path(@event, feedback)%>
     </div>
+    </div>
+    </div>
+    </div>
+    
+    <%if feedback.user == current_user %>
+    <div class=" text-center font-bold text-lg text-blue-600 hover:text-blue-900">
+      <%=link_to "edit this rating", edit_event_feedback_path(@event, feedback)%>
+    </div>
+    <div class=" text-center font-bold text-lg text-blue-800 hover:text-blue-900">
       <%=form_tag event_feedback_path(@event, feedback), method: "delete" do%>
-        <%=submit_tag "delete your comment"%>
+        <%=submit_tag "delete your rating"%>
       <%end%>
+      </div>
     <%end%>
   <% end %>
   </ul>

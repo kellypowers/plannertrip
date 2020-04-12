@@ -66,6 +66,7 @@ class EventsController < ApplicationController
         #     @event.update(event_params)  
         #   redirect_to event_path(@event), :notice => "Update completed"
         if params[:event][:feedback]
+            # put some method to check if user has already commented on this event?
             @comment = Feedback.new(user_id: current_user.id, event_id: @event.id, content: params[:event][:feedback][:content], rating: params[:event][:feedback][:rating])
             if @comment.save 
                 flash[:message] = "Comment added"
