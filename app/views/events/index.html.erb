@@ -53,6 +53,8 @@
 </div>
 <%end%>
 
+<%=link_to "Find the distance between two of your events", "/events/distance"%>
+
 <%# get a map in here that displays all? %> 
 <div class="flex justify-center" >
 <div id="map" style='width: 800px; height: 400px;'>
@@ -60,7 +62,7 @@
                                        async defer></script>
 <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
 <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script>
- markers = handler.addMarkers(<%=raw @hash.to_json %>);
+ <%# markers = handler.addMarkers(<%=raw @hash.to_json ); %>
 </div>     
 </div>
 

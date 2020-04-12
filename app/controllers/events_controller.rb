@@ -23,6 +23,17 @@ class EventsController < ApplicationController
         end
     end
 
+    def distance
+        @user = current_user
+        @from = Event.find_by(id: params[:from])
+        @to = Event.find_by(id: params[:to])
+            if @from && @to
+            flash[:message] =
+                "The distance between <b>#{@from.name}</b> and <b>#{@to.name}</b> is #{@from.distance_from(@to.to_coordinates)} miles"
+            end
+            redirect 'distance'
+  end
+
     def create
         @event = current_user.events.build(event_params) #this adds 
         #@event = Event.new(event_params)

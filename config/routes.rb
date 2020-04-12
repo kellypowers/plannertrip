@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
   post "/users/:id/events/:id" => 'events#add' #do i still need this? should add from just events/:id
-
+  get "/events/distance" => 'events#distance'
+  post "events/distance" => 'events#distance'
   
   resources :users do 
       resources :events 
