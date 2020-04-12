@@ -5,18 +5,29 @@
 </div>
 
 <div>
-  <p>  Event Name <%=@event.name%> </p><br>
-  <p>Event Category: <%=@event.category%></p> <br>
-  <p>Event Description: <%=@event.comment%></p><br>
-  <p>Event Address: <%=@event.full_address%></p><br>
+  <h1 class="underline font-bold">Event Name </h1>
+    <p><%=@event.name%> </p><br>
+  <h1 class="underline font-bold">Event Category </h1>
+  <p><%=@event.category%></p> <br>
+  <h1 class="underline font-bold">Event Description </h1>
+    <p> <%=@event.comment%></p><br>
+  <h1 class="underline font-bold">Event Address </h1> 
+    <p><%=@event.full_address%></p><br>
+  <h1 class="underline font-bold">Your Comment</h1>
+    <p><%=@event.comment%></p><br>
 </div>
 <br>
-<%if @event.average_rating.present?%>
-  <p> Average rating: <%= @event.average_rating%>
-<%end%>
+<div>
+  <%if @event.feedbacks.any?%>  
+    <p> Average rating: <%= @event.average_rating%> </p>
+  <%else%>
+    <p> There are no ratings for this event yet. </p>
+  <%end%>
+</div>
 <br>
 <br>
 
+<div>
 <%=@event.feedbacks.count%> Comments:
   <% @event.feedbacks.each do |feedback| %>
   <ul>
@@ -26,40 +37,63 @@
       <%=feedback.user.name%> rated <%=@event.name%> a <%=feedback.rating%> out of 10. </li>
     <%#end%>
     <%if feedback.user == current_user %>
+    <div class=" text-center font-bold text-lg text-blue-800 hover:text-blue-900">
       <%=link_to "edit this comment", edit_event_feedback_path(@event, feedback)%>
+    </div>
       <%=form_tag event_feedback_path(@event, feedback), method: "delete" do%>
         <%=submit_tag "delete your comment"%>
       <%end%>
-      <%end%>
-    <ul>
+    <%end%>
   <% end %>
-<div>
+  </ul>
+</div>
 <br>
-<div class="">
+<div class="flex justify-center">
+<div  class=" w-2/5 bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 md-10 rounded focus:outline-none focus:shadow-outline">
   <%=link_to "Add A Comment and Rate this Event", new_event_feedback_path(@event)%>
+
+</div>
 </div>
 <br>
   <%if @event.belongs_to_user(current_user)%>
-    <div>
-    <br>
-      <%=link_to "Edit this Event", edit_event_path(@event) %>
+    <div class="flex justify-center">
+      <div  class=" w-2/5 bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 md-10 rounded focus:outline-none focus:shadow-outline">
+        <%=link_to "Edit this Event", edit_event_path(@event) %>
+      </div>
     <br>
     </div>
+    <br>
     <div class="form">
       <%= form_tag event_path(@event.id), method: "delete" do %>
-        <%= submit_tag "Delete #{@event.name}" %>
+      <div class="flex justify-center">
+        <div  class=" w-2/5 bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 md-10 rounded focus:outline-none focus:shadow-outline">
+          <%= submit_tag "Delete #{@event.name}", class:"bg-blue-500 hover:bg-blue-700 font-bold" %>
+        </div>
+      </div>
       <% end %>
     </div>
   <%end%>
 </div>
+<br>
 <%# want this part shown only if event is not already in the user's events, and if user is not event.user (one who made it) %>
-<%if !current_user.event_already_added?(@event) || @event.belongs_to_user(current_user)%>
+<%if !current_user.event_already_added?(@event) || !@event.belongs_to_user(current_user)%>
   <div class="form">
     <%= form_tag user_event_path(@event.id), method: "post" do %>
     <br>
-      <%label_tag "Comment" %>
-      <%=text_field_tag "comment", :comment %>  <br>
-      <%= submit_tag "Add #{@event.name} to your events" %>
+    <div class="text-center">
+      <div class=" text-center font-bold text-md text-blue-800 hover:text-blue-900"> 
+        <%=label_tag "Add a Comment to add to your events" %>
+      </div>
+    </div>
+      <div class="flex justify-center">
+        <%=text_field_tag :comment %>  <br>
+      </div>
+      <br>
+      <div class="flex justify-center">
+        <div  class=" w-2/5 bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 md-10 rounded focus:outline-none focus:shadow-outline">
+          <%= submit_tag "Add #{@event.name} to your events", class:"bg-blue-500 hover:bg-blue-700 font-bold" %>
+        </div>
+      </div>
     <% end %>
     <br>
   </div>

@@ -19,7 +19,7 @@
 <br>
 <br>
 <%if params[:query].present? && @events.none?%>
-  <div class="inline-block align-baseline text-center font-bold text-lg text-blue-800 hover:text-blue-900">
+  <div class=" text-center font-bold text-lg text-blue-800 hover:text-blue-900">
     <%=link_to "Add your own event!", new_event_path%>
   </div>
 <%end%>
@@ -28,11 +28,14 @@
 <% if @userevents.present?%>
   <div>
   Your Events: <br>
+  <ul>
     <% @userevents.each do |event| %>
-      <div class="inline-block align-baseline text-center font-bold text-lg text-blue-800 hover:text-blue-900">
-        <span><%=link_to event.name, event_path(event) %></span>
+      <div class=" text-center font-bold text-lg text-blue-800 hover:text-blue-900">
+        <li><%=link_to event.name, event_path(event) %></li>
+        
       </div>
     <% end %>
+    </ul>
   </div>
 <%end%>
 <br>
@@ -40,11 +43,13 @@
 <%if @events_added.present?%>
 <div>
   Events You added: <br>
+  <ul>
   <% @events_added.each do |event| %>
-    <div class="inline-block align-baseline text-center font-bold text-lg text-blue-800 hover:text-blue-900">
-      <span><%=link_to event.name, event_path(event) %></span>
+    <div class="text-center font-bold text-lg text-blue-800 hover:text-blue-900">
+      <li><%=link_to event.name, event_path(event) %></li>
     </div>
   <% end %>
+  </ul>
 </div>
 <%end%>
 
