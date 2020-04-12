@@ -76,13 +76,15 @@
 </div>
 <br>
 <%# want this part shown only if event is not already in the user's events, and if user is not event.user (one who made it) %>
-<%if !current_user.event_already_added?(@event) || !@event.belongs_to_user(current_user)%>
+<%# id either of these is false... want to NOT show the form.   if one of them is true, do not show form %>
+<%if current_user.event_already_added?(@event) || !@event.belongs_to_user(current_user)%>
   <div class="form">
     <%= form_tag user_event_path(@event.id), method: "post" do %>
     <br>
     <div class="text-center">
-      <div class=" text-center font-bold text-md text-blue-800 hover:text-blue-900"> 
+      <div class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
         <%=label_tag "Add a Comment to add to your events" %>
+        <br>
       </div>
     </div>
       <div class="flex justify-center">
@@ -90,7 +92,7 @@
       </div>
       <br>
       <div class="flex justify-center">
-        <div  class=" w-2/5 bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 md-10 rounded focus:outline-none focus:shadow-outline">
+        <div class=" text-center font-bold text-lg text-blue-800 hover:text-blue-900">
           <%= submit_tag "Add #{@event.name} to your events", class:"bg-blue-500 hover:bg-blue-700 font-bold" %>
         </div>
       </div>
