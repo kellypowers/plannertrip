@@ -13,8 +13,10 @@
     <p> <%=@event.comment%></p><br>
   <h1 class="underline font-bold">Event Address </h1> 
     <p><%=@event.full_address%></p><br>
-  <h1 class="underline font-bold">Your Comment</h1>
-    <p><%=@event.comment%></p><br>
+    <%if @event.user_events.include?(user_id: current_user.id)%>
+      <h1 class="underline font-bold">Your Comment</h1>
+        <p><%=@userevent.comment%></p><br>
+    <%end%>
 </div>
 <br>
 <div>
@@ -37,8 +39,8 @@
           <div class="md:flex md:items-center bg-white shadow-md rounded py-10 px-8 pt-6 pb-8 mb-10">
               <div class=" px-10 mb-4">
 
-      <span class=" text-center font-bold text-sm text-black-800 hover:text-blue-900">
-        <%= link_to feedback.user.name, user_path(feedback.user) %> 
+      <span class=" text-center font-bold text-sm text-black-800 ">
+        <%=feedback.user.name%> 
       </span> 
     said
     <div class="text-gray-800">
@@ -97,7 +99,7 @@
 </div>
 <br>
 <%# want this part shown only if event is not already in the user's events, and if user is not event.user (one who made it) %>
-<%# id either of these is false... want to NOT show the form.   if one of them is true, do not show form %>
+<%# id either of these is false... want to NOT show the form.   if one of them is true, do not show form , show form if any are false%>
 <%if current_user.event_already_added?(@event) || !@event.belongs_to_user(current_user)%>
   <div class="form">
     <%= form_tag user_event_path(@event.id), method: "post" do %>

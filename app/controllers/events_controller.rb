@@ -43,6 +43,9 @@ class EventsController < ApplicationController
 
     def show 
         #binding.pry
+        if @event.user_events.include?(user_id: current_user.id)
+            @userevent = UserEvent.find_by(user_id: current_user.id, event_id: @event.id)
+        end
     end
 
     #this is not working correctly
