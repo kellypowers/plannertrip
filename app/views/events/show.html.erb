@@ -13,7 +13,7 @@
     <p> <%=@event.comment%></p><br>
   <h1 class="underline font-bold">Event Address </h1> 
     <p><%=@event.full_address%></p><br>
-    <%if @event.user_events.include?(user_id: current_user.id)%>
+    <%if @userevent%>
       <h1 class="underline font-bold">Your Comment</h1>
         <p><%=@userevent.comment%></p><br>
     <%end%>
@@ -59,11 +59,11 @@
     
     <%if feedback.user == current_user %>
     <div class=" text-center font-bold text-lg text-blue-600 hover:text-blue-900">
-      <%=link_to "edit this rating", edit_event_feedback_path(@event, feedback)%>
+      <%=link_to "edit your rating", edit_event_feedback_path(@event, feedback)%>
     </div>
     <div class=" text-center font-bold text-lg text-blue-800 hover:text-blue-900">
       <%=form_tag event_feedback_path(@event, feedback), method: "delete" do%>
-        <%=submit_tag "delete your rating"%>
+        <%=submit_tag "delete your rating", class:"bg-blue-500 hover:bg-blue-700 font-bold"%>
       <%end%>
       </div>
     <%end%>
@@ -71,12 +71,14 @@
   </ul>
 </div>
 <br>
-<div class="flex justify-center">
-<div  class=" w-2/5 bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 md-10 rounded focus:outline-none focus:shadow-outline">
-  <%=link_to "Add A Comment and Rate this Event", new_event_feedback_path(@event)%>
-
-</div>
-</div>
+<%# show this if havent already raTED %>
+<%if !@event.user_already_gave_feedback(current_user)%>
+  <div class="flex justify-center">
+    <div  class=" w-2/5 bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 md-10 rounded focus:outline-none focus:shadow-outline">
+      <%=link_to "Add A Comment and Rate this Event", new_event_feedback_path(@event)%>
+    </div>
+  </div>
+<%end%>
 <br>
   <%if @event.belongs_to_user(current_user)%>
     <div class="flex justify-center">
@@ -100,7 +102,7 @@
 <br>
 <%# want this part shown only if event is not already in the user's events, and if user is not event.user (one who made it) %>
 <%# id either of these is false... want to NOT show the form.   if one of them is true, do not show form , show form if any are false%>
-<%if current_user.event_already_added?(@event) || !@event.belongs_to_user(current_user)%>
+<%if !current_user.event_already_added?(@event) && !@event.belongs_to_user(current_user)%>
   <div class="form">
     <%= form_tag user_event_path(@event.id), method: "post" do %>
     <br>

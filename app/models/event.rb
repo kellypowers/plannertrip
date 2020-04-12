@@ -66,6 +66,10 @@ class Event < ApplicationRecord
   end
     
 
+  def user_already_gave_feedback(current_user)
+    self.feedbacks.find_by(event_id: self.id, user_id: current_user.id) ? true : false 
+  end
+
   # def already_added?
   #   if current_user.added_events.valid?
   #     current_user.added_events.include?(@event) ? true : false 
