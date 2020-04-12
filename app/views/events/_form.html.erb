@@ -18,21 +18,17 @@
         </ul>
       </div>
     <% end %>
- <%#=f.hidden_field :user_ids%>
   <div class="form-label">
     <%=f.label :name %>
   </div>
   <div class="form-field">
     <%=f.text_field :name %>
   </div>
-  <%# Unpermitted parameters: :datetime(1i), :datetime(2i), :datetime(3i), :datetime(4i), :datetime(5i) %>
   <br>
-    <%# make this a drop down! %>
   <div class="form-label">
     <%=f.label :category %>
   </div>
   <div class="form-field">
-   <%#= f.collection_select  %>
     <%=f.text_field :category %>
   </div>
   <br>

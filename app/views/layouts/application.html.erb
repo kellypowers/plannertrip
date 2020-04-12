@@ -34,7 +34,11 @@
         </button>
     <%end%>
 
-    
+    <div class="flash-message">
+      <%if flash[:message].present?%>
+          <%=flash[:message]%>
+      <%end%>
+  </div>
     <div class="text-center">
       <%= yield %>
     </div>

@@ -9,13 +9,15 @@ class EventsController < ApplicationController
     def index 
         if params[:query]
             @events = Event.search_location(params[:query])
+            @hash = Gmaps4rails.build_markers(@events) do |event, marker|
+                marker.lat event.latitude
+                marker.lng event.longitude
+                marker.infowindow event.name
+              end
             if @events.none?
                 flash[:message] = "There are no events for this location yet"
             end
-            #use a scope method to get events that match the query (in the Event model)
-            #@events = Event.all
         else
-            #binding.pry
             @userevents = current_user.events
             @events_added = current_user.added_events
         end
@@ -43,9 +45,9 @@ class EventsController < ApplicationController
 
     def show 
         #binding.pry
-        if @event.user_events.include?(user_id: current_user.id)
+       # if current_user.added_events.include?(event_id: @event.id)
             @userevent = UserEvent.find_by(user_id: current_user.id, event_id: @event.id)
-        end
+        #end
     end
 
     #this is not working correctly
@@ -65,37 +67,28 @@ class EventsController < ApplicationController
 
 
     def update
-        # if @event.user == current_user
-        #     @event.update(event_params)  
-        #   redirect_to event_path(@event), :notice => "Update completed"
+        #if updating by adding comment:
         if params[:event][:feedback]
-            # put some method to check if user has already commented on this event?
-            #binding.pry
+            #if comment already exists, edit it.
             if @comment = Feedback.find_by(user_id: current_user.id, event_id: @event.id)
-            # @comment.content = params[:event][:feedback][:content]
-            # @comment.rating = params[:event][:feedback][:rating])
-            # if @comment.save 
                 @comment.content = params[:event][:feedback][:content]
                 @comment.rating = params[:event][:feedback][:rating]
                 @comment.save
                 flash[:message] = "Comment updated"
                 redirect_to event_path(@event)
             else
+                #else, add new comment
                 @comment = Feedback.new(user_id: current_user.id, event_id: @event.id, content: params[:event][:feedback][:content], rating: params[:event][:feedback][:rating])
                 if @comment.save
                     flash[:message] = "Comment added"
                     redirect_to event_path(@event)
-            
-            # else 
-            #     puts "#{@feedback}"
-            # @feedback.errors.full_messages.each do |msg|
-            #     puts "#{msg}"
                 else
                     flash[:message] = "Unsuccessful"
                     redirect_to event_path(@event)
                 end
             end 
-            elsif @event.user == current_user
+        #if the current user is the one who created the event, can update the event info.
+        elsif @event.user == current_user
                 @event.update(event_params)  
                 redirect_to event_path(@event), :notice => "Update completed"
         else

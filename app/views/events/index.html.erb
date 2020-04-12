@@ -53,4 +53,44 @@
 </div>
 <%end%>
 
-<%# get a map in here that displays all? %>
+<%# get a map in here that displays all? %> 
+<div class="flex justify-center" >
+<div id="map" style='width: 800px; height: 400px;'>
+<script src="https://maps.googleapis.com/maps/api/js?key=#{ENV['MY_KEY']}&callback=initMap"
+                                       async defer></script>
+<script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+<script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script>
+ markers = handler.addMarkers(<%=raw @hash.to_json %>);
+</div>     
+</div>
+
+
+   
+
+<script>
+  window.onload = function () {
+    var markers = <%=raw @hash.to_json %>;
+    var mapOptions = {
+        center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+        zoom: 13,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var infoWindow = new google.maps.InfoWindow();
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    for (i = 0; i < markers.length; i++) {
+        var data = markers[i]
+        var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+        marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: data.title
+        });
+        (function (marker, data) {
+            google.maps.event.addListener(marker, "click", function (e) {
+                infoWindow.setContent(data.description);
+                infoWindow.open(map, marker);
+            });
+        })(marker, data);
+    }
+}
+</script>

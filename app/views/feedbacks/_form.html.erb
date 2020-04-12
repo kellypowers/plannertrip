@@ -4,6 +4,19 @@
          <%=f.hidden_field :user_id%>
 
         <%= f.fields_for feedback do |af| %>
+        <% if feedback.errors.any? %>
+            <div id="error_explanation">
+                <h2>
+                    <%= pluralize(feedback.errors.count, "error") %>
+                    prohibited this post from being saved:
+                </h2> 
+                <ul>
+                    <% feedback.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
         <div class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             <%=af.label :content %>
         </div>

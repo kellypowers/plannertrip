@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.1'
+gem 'gmaps4rails'
 gem 'geocoder'
 gem 'dotenv-rails'
 gem 'omniauth'
