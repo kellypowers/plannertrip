@@ -15,9 +15,16 @@ class FeedbacksController < ApplicationController
 
 
     def edit 
+        #binding.pry
+        @event = Event.find_by_id(params[:event_id])
+        @feedback = Feedback.find_by_id(params[:id])
     end
 
     def update
+        # @event = Event.find_by_id(params[:event_id])
+        # @feedback = Feedback.find_by_id(params[:id])
+        # binding.pry
+        # @event.feedbacks.update(feedback_params)
     end
 
     def destroy
