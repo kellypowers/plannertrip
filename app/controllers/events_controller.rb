@@ -70,26 +70,34 @@ class EventsController < ApplicationController
         #   redirect_to event_path(@event), :notice => "Update completed"
         if params[:event][:feedback]
             # put some method to check if user has already commented on this event?
-            @comment = Feedback.find_or_create_by(user_id: current_user.id, event_id: @event.id)
+            #binding.pry
+            if @comment = Feedback.find_by(user_id: current_user.id, event_id: @event.id)
             # @comment.content = params[:event][:feedback][:content]
             # @comment.rating = params[:event][:feedback][:rating])
-            if @comment.save 
+            # if @comment.save 
                 @comment.content = params[:event][:feedback][:content]
                 @comment.rating = params[:event][:feedback][:rating]
                 @comment.save
-                flash[:message] = "Comment added"
+                flash[:message] = "Comment updated"
                 redirect_to event_path(@event)
+            else
+                @comment = Feedback.new(user_id: current_user.id, event_id: @event.id, content: params[:event][:feedback][:content], rating: params[:event][:feedback][:rating])
+                if @comment.save
+                    flash[:message] = "Comment added"
+                    redirect_to event_path(@event)
+            
             # else 
             #     puts "#{@feedback}"
             # @feedback.errors.full_messages.each do |msg|
             #     puts "#{msg}"
-            else
-                flash[:message] = "Unsuccessful"
-                redirect_to event_path(@event)
-             end 
-        elsif @event.user == current_user
-            @event.update(event_params)  
-            redirect_to event_path(@event), :notice => "Update completed"
+                else
+                    flash[:message] = "Unsuccessful"
+                    redirect_to event_path(@event)
+                end
+            end 
+            elsif @event.user == current_user
+                @event.update(event_params)  
+                redirect_to event_path(@event), :notice => "Update completed"
         else
             flash[:message] = "You can only update events you created."
           render 'show'
