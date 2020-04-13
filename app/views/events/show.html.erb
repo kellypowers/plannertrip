@@ -122,7 +122,7 @@
   </div>
 <%end%>
 <br>
-<%=link_to "Find the distance between two of your events", "/events/distance"%>
+
 
 <div class="flex justify-center">
   <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@event.latitude},#{@event.longitude}&markers=#{@event.latitude},#{@event.longitude}&zoom=15&size=640x400&key=#{ENV['MY_KEY']}", #!!!!add key here

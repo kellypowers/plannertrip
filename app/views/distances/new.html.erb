@@ -1,0 +1,20 @@
+
+<br>
+<br>
+<div>
+    <h1> Find the distance between two of your events </h1>
+</div>
+
+<%= form_tag distances_path do %>
+  <fieldset class="form-group">
+  <%= label_tag 'from', 'From' %>
+  <%= select_tag 'from', options_from_collection_for_select(@events, :id, :name), class: "form-control" %>
+</fieldset>
+
+  <fieldset class="form-group">
+  <%= label_tag 'to', 'To' %>
+  <%= select_tag 'to', options_from_collection_for_select(@events, :id, :name), class: "form-control" %>
+</fieldset>
+
+  <%= submit_tag 'Go!', class: '' %>
+<% end %>

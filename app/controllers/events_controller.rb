@@ -23,26 +23,9 @@ class EventsController < ApplicationController
         end
     end
 
-    def distance
-        @user = current_user
-        @from = Event.find_by(id: params[:from])
-        @to = Event.find_by(id: params[:to])
-            if @from && @to
-            flash[:message] =
-                "The distance between <b>#{@from.name}</b> and <b>#{@to.name}</b> is #{@from.distance_from(@to.to_coordinates)} miles"
-            end
-            redirect 'distance'
-  end
 
     def create
         @event = current_user.events.build(event_params) #this adds 
-        #@event = Event.new(event_params)
-        #need different method for when user creates the event? right now any events seeded are aautomatically linked to user
-        #UserEvent.create(comment: event_params[:comment]) #need to get this working, so the join table adds comment
-        #@userevent = UserEvent.find_by(event_id: @event.id, user_id: current_user.id)
-        #UserEvent.last.comment = event_params[:comment]
-        #@userevent.comment = event_params[:comment]
-        #@event.users << current_user 
         if @event.save
             redirect_to "/users/#{current_user.id}/events/#{@event.id}"
         else 
@@ -61,11 +44,8 @@ class EventsController < ApplicationController
         #end
     end
 
-    #this is not working correctly
+   
     def add 
-        #@event = Event.find_by_id(params[:id])
-        #if event is alreadt added or event belongs to user, dont add, show the event
-        #binding.pry
         if current_user.event_already_added?(@event) || @event.belongs_to_user(current_user)
             redirect_to user_event_path(current_user, @event)
         else 
