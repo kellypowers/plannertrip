@@ -1,24 +1,5 @@
-<div class="text-red">
-  <%if flash[:message].present?%>
-      <%=flash[:message]%>
-  <%end%>
-<div>
-<div class="form">
-<%= form_for event do |f| %>
-<%# dry this errors up? %>
-    <% if event.errors.any? %>
-      <div id="error_explanation">
-        <h2>
-          <%= pluralize(event.errors.count, "error") %>
-          prohibited this post from being saved:
-        </h2> 
-        <ul>
-        <% event.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
+<%= render partial: "layouts/errors", locals: {variable: @event} %>
+
   <div class="form-label">
     <%=f.label :name %>
   </div>

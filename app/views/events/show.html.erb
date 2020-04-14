@@ -36,11 +36,12 @@
               <div class=" px-10 mb-4">
 
       <span class=" text-center font-bold text-sm text-black-800 ">
+        <%=feedback.created_at%> <br>
         <%=feedback.user.name%> 
       </span> 
     said
     <div class="text-gray-800">
-    "<%= feedback.content %>"
+    "<%= feedback.content %>" 
     <%#if feedback.rating.any?%>
     <br>
       <span class="font-bold text-lg">
