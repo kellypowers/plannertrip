@@ -1,24 +1,37 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Project Title
 
-Things you may want to cover:
+PlannerTrip allows you to create events and locations that are visible to other users.  You can search a location for events, add them to your events and rate them.
 
-* Ruby version
+## Getting Started
 
-* System dependencies
+run ```bundle install``` to install all of the gems. 
+run the rails server using ```rails s``` and go to ```localhost:3000``` in your browser.  
+Sign up or log in using Facebook or Github.
 
-* Configuration
 
-* Database creation
 
-* Database initialization
+## Built With
 
-* How to run the test suite
+* [Rails](https://rubyonrails.org/) - The web framework used
+* [Geocoder](https://github.com/alexreisner/geocoder) - Rails Geocoder Gem
+* [Google Maps for Rails](https://github.com/apneadiving/Google-Maps-for-Rails) - Used to generate Google Maps
+* [OmniAuth](https://github.com/omniauth/omniauth) - Used for facebook and github login
+* [dotenv](https://github.com/bkeepers/dotenv) - Used to hide API keys
 
-* Services (job queues, cache servers, search engines, etc.)
+## Contributing
 
-* Deployment instructions
+Please read [CONTRIBUTING.md] for details on our code of conduct, and the process for submitting pull requests to us.
 
-* ...
+
+## Authors
+
+* **Kelly Powers** - *Initial work* - [kellypowers](https://github.com/kellypowers)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
