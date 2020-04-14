@@ -8,7 +8,6 @@ class SessionsController < ApplicationController
 
   def create # receives data submitted in login form, authenticates and logs in a valid user
     if auth
-      #binding.pry
       @user = User.find_or_create_by(uid: auth['uid']) do |u|
         u.name = auth['info']['name']
         u.email = auth['info']['email']

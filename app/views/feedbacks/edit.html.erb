@@ -1,4 +1,20 @@
+<div class="errors">
+<% if @feedback.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@feedback.errors.count, "error") %>
+      prohibited this post from being saved:
+    </h2>
+ 
+    <ul>
+    <% @feedback.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+</div>
 <br>
 <h1 class="underline text-bold">Rate and comment on <%=@event.name%></h1>
 <br>
-<%= render partial: "form", locals: { event: @event, feedback: @feedback } %>
+<%= render partial: "form", locals: { feedback: @feedback } %>

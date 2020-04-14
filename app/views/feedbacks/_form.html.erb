@@ -1,42 +1,40 @@
+<div class="errors">
+<% if @feedback.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@feedback.errors.count, "error") %>
+      prohibited this post from being saved:
+    </h2>
+    <ul>
+    <% @feedback.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+</div>
+<br>
+    <%=form_for [feedback.event, feedback] do |f|%>
 
-
-    <%=form_for event do |f|%>
-         <%=f.hidden_field :user_id%>
-
-        <%= f.fields_for feedback do |af| %>
-        <% if feedback.errors.any? %>
-            <div id="error_explanation">
-                <h2>
-                    <%= pluralize(feedback.errors.count, "error") %>
-                    prohibited this post from being saved:
-                </h2> 
-                <ul>
-                    <% feedback.errors.full_messages.each do |msg| %>
-                        <li><%= msg %></li>
-                    <% end %>
-                </ul>
-            </div>
-        <% end %>
         <div class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            <%=af.label :content %>
+            <%=f.label :content %>
         </div>
-        <div class="ocus:shadow-outline">
-            <%=af.text_area :content %>
+        <div class="focus:shadow-outline">
+            <%=f.text_area :content %>
         </div>
         <br>
         <div class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            <%=af.label "Please rate from 1-10 with 10 being the best" %>
+            <%=f.label "Please rate from 1-10 with 10 being the best" %>
         </div>
-        <div class="ocus:shadow-outline">
-            <%=af.text_field :rating %>
+
+
+        <div class="focus:shadow-outline">
+            <%=f.number_field :rating %>
         </div>
         <br>
 
-        <%end%>
     <br>
     <div class=" text-center font-bold text-lg text-blue-800 hover:text-blue-900">
         <%=f.submit "Add Comment", class:"bg-blue-500 text-white  hover:bg-blue-700 font-bold"%>
     </div>
     <% end %>
-
-    <%# you can only update events you created.... need to fix this %>

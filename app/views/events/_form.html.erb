@@ -5,6 +5,7 @@
 <div>
 <div class="form">
 <%= form_for event do |f| %>
+<%# dry this errors up? %>
     <% if event.errors.any? %>
       <div id="error_explanation">
         <h2>

@@ -85,11 +85,11 @@
         marker = new google.maps.Marker({
             position: myLatlng,
             map: map,
-            title: data.title
+            title: data.infowindow
         });
         (function (marker, data) {
             google.maps.event.addListener(marker, "click", function (e) {
-                infoWindow.setContent(data.description);
+                infoWindow.setContent(data.infowindow);
                 infoWindow.open(map, marker);
             });
         })(marker, data);

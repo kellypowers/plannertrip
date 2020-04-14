@@ -17,7 +17,6 @@ class UsersController < ApplicationController
       #binding.pry 
       if @user.save 
         session[:user_id] = @user.id
-        #redirect_to user_path(@user)
         redirect_to user_path(@user)
       else
         #binding.pry
