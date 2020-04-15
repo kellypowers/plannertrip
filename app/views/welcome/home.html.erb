@@ -1,6 +1,3 @@
-<%if flash[:message].present?%>
-    <%=flash[:message]%>
-<%end%>
 
 <% if name = session[:name] && logged_in?%>
   <p>Welcome <%= name -%>! We know who you are thanks to Omniauth!</p>

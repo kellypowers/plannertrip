@@ -1,7 +1,4 @@
 <h1>Edit Acount Info</h1>
 
-<%if flash[:message].present?%>
-    <%=flash[:message]%>
-<%end%>
 
 <%= render partial: "form", locals: { user: @user } %>
