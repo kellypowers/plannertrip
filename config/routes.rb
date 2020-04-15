@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :events do 
-    resources :feedbacks 
+    resources :feedbacks
   end
 
 
