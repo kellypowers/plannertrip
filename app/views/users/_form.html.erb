@@ -1,13 +1,6 @@
 
   <%= form_for user do |f| %>
 
-    <ul>
-    <% user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-    <% end %>
-    </ul>
-    <% end %>
-
     <div class="form-label">
       <%=f.label(:name, "Name")%>
     </div>
