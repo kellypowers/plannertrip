@@ -12,6 +12,8 @@ class Event < ApplicationRecord
   after_validation :geocode, if: ->(obj){ obj.full_address.present?} #and obj.full_address_changed? }
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
+  validates :name, presence: true
+  validates :city, presence: true
    
 
   

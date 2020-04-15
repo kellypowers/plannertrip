@@ -1,4 +1,5 @@
-<%= render partial: "layouts/errors", locals: {variable: @event} %>
+
+<%= form_for event do |f| %>
 
   <div class="form-label">
     <%=f.label :name %>

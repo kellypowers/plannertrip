@@ -29,13 +29,13 @@ class EventsController < ApplicationController
     def create
         @event = current_user.events.build(event_params) #this adds 
         if @event.save
+            flash[:message] = "Event created successfully!"
             redirect_to "/users/#{current_user.id}/events/#{@event.id}"
         else 
-            puts "#{@event}"
-            @event.errors.full_messages.each do |msg|
-                puts "#{msg}"
-            end
-            raise params.inspect
+            flash[:message]= "unsuccessful"
+            render "new"
+            
+            #raise params.inspect
         end
     end
 

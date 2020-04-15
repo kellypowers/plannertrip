@@ -5,7 +5,7 @@ class CreateFeedbacks < ActiveRecord::Migration[6.0]
       t.integer :rating
       t.belongs_to :user
       t.belongs_to :event
-      t.timestamps :created_at
+      t.timestamps null: false
     end
   end
 end
