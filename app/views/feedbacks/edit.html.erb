@@ -1,18 +1,4 @@
-<div class="errors">
-<% if @feedback.errors.any? %>
-  <div id="error_explanation">
-    <h2>
-      <%= pluralize(@feedback.errors.count, "error") %>
-      prohibited this post from being saved:
-    </h2>
- 
-    <ul>
-    <% @feedback.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= render partial: "layouts/errors", locals: {variable: @feedback} %>
 </div>
 <br>
 <h1 class="underline text-bold">Rate and comment on <%=@event.name%></h1>
