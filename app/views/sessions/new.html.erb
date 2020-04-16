@@ -1,22 +1,13 @@
 <h1 class="font-bold  text-center ">
     Log in 
 </h1>
-
+<%= render partial: "layouts/errors", locals: {variable: @user} %>
 <div class="flex justify-center">
 <div class="  w-full max-w-xs">
     <div class="md:flex md:items-center bg-white shadow-md rounded py-10 px-8 pt-6 pb-8 mb-10">
         <div class=" px-10 mb-4">
             <%=form_tag login_path do %>
-                <% if @user.errors.any? %>
-                    <div id="error_explanation">
-                    <h2>There were some errors:</h2>
-                    <ul>
-                        <% @user.errors.full_messages.each do |message| %>
-                        <li><%= message %></li>
-                        <% end %>
-                    </ul>
-                    </div>
-                <% end %>
+
             <div class="field<%='field_with_errors' if @user.errors[:email].any?%>">
                 <div class="block text-gray-700 text-sm font-bold mb-2">
                     <%=label_tag :email, "Enter Your Email"%>
@@ -54,8 +45,4 @@
     <div class="inline-block align-baseline text-center font-bold text-sm text-blue-800 hover:text-blue-900">
         <%= link_to 'Sign in with Facebook', '/auth/facebook'%>
      </div>
-     <br>
-     <div class="inline-block align-baseline text-center font-bold text-sm text-blue-800 hover:text-blue-900">
-        <%= link_to 'Sign in with GitHub', '/auth/github'%>
-    </div>
 </div>

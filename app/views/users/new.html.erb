@@ -1,13 +1,16 @@
-<h1>Sign Up</h1>
-
+<h1 class="undlerline font-bold">Sign Up</h1>
+<br>
 <%= render partial: "layouts/errors", locals: {variable: @user} %>
 <%= render partial: "form", locals: { user: @user } %>
 
 
 Or:
-<p> <%= link_to 'Sign in with Facebook', '/auth/facebook'%>.</p>
-<p> <%= link_to 'Sign in with GitHub', '/auth/github'%>.</p>
+<br>
+<div class="inline-block align-baseline text-center font-bold text-lg text-blue-800 hover:text-blue-900">
+    <p> <%= link_to 'Sign in with Facebook', '/auth/facebook'%>.</p>
+</div>
 Or
-<p><%=link_to 'Log in', '/login'%></p>
-
+<div class="inline-block align-baseline text-center font-bold text-lg text-blue-800 hover:text-blue-900">
+    <p><%=link_to 'Log in', '/login'%></p>
+</div>
   

@@ -8,7 +8,7 @@ PlannerTrip allows you to create events and locations that are visible to other 
 
 run ```bundle install``` to install all of the gems. 
 run the rails server using ```rails s``` and go to ```localhost:3000``` in your browser.  
-Sign up or log in using Facebook or Github.
+Sign up or log in using Facebook.
 
 
 
